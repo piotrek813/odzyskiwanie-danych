@@ -1,5 +1,8 @@
 import React from 'react';
+import MainTemplate from 'templates/MainTemplate';
 
-const IndexPage = () => <h1>Hello World</h1>;
+const IndexPage = () => (
+  <MainTemplate>{/* <h1>Hello World</h1> */}</MainTemplate>
+);
 
 export default IndexPage;
