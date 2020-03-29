@@ -5,7 +5,6 @@ import theme from 'utils/theme';
 import Navbar from 'components/Navbar/Navbar';
 import GlobalStyle from 'components/GlobalStyle';
 
-// eslint-disable-next-line react/prop-types
 const MainTemplate = ({ children }) => (
   <ThemeProvider theme={theme}>
     <>
@@ -16,11 +15,11 @@ const MainTemplate = ({ children }) => (
   </ThemeProvider>
 );
 
-MainTemplate.propsType = {
+MainTemplate.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]),
+  ]).isRequired,
 };
 
 export default MainTemplate;
