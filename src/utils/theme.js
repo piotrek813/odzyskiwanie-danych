@@ -4,7 +4,7 @@ export default {
   dark: '#000',
   font: {
     size: {
-      Heading: {
+      heading: {
         section: '3.6rem',
         small: '1.2rem',
         normal: '2.4rem',
@@ -12,7 +12,7 @@ export default {
       },
       content: {
         small: '1rem',
-        medium: '1.4px',
+        medium: '1.4rem',
         normal: '1.8rem',
         big: '2.1rem',
       },

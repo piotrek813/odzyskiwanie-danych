@@ -2,25 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ThemeProvider } from 'styled-components';
 import theme from 'utils/theme';
-import Navbar from 'components/Navbar/Navbar';
 import GlobalStyle from 'components/GlobalStyle';
+import Navbar from 'components/Navbar/Navbar';
+import HeroTemplate from 'templates/HeroTemplate';
 
-// eslint-disable-next-line react/prop-types
-const MainTemplate = ({ children }) => (
+const MainTemplate = ({ children, data }) => (
   <ThemeProvider theme={theme}>
     <>
       <GlobalStyle />
       <Navbar />
+      <HeroTemplate data={data} />
       {children}
     </>
   </ThemeProvider>
 );
 
-MainTemplate.propsType = {
+MainTemplate.propTypes = {
   children: PropTypes.oneOfType([
     PropTypes.arrayOf(PropTypes.node),
     PropTypes.node,
-  ]),
+  ]).isRequired,
+  data: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
 export default MainTemplate;

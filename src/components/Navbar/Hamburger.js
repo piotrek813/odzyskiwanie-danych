@@ -13,7 +13,7 @@ const InnerHamburger = styled.div`
   width: 30px;
   height: 2px;
   background-color: ${({ theme, isOpen }) =>
-    isOpen ? 'transparent' : theme.dark};
+    isOpen ? 'transparent' : theme.light};
   transition: background-color 0.25s ease-in-out;
 
   ::after,
@@ -23,8 +23,7 @@ const InnerHamburger = styled.div`
     left: 0;
     width: 30px;
     height: 2px;
-    background-color: ${({ theme, isOpen }) =>
-      isOpen ? theme.light : theme.dark};
+    background-color: ${({ theme }) => theme.light};
     transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
   }
 

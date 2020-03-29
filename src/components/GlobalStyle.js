@@ -1,13 +1,17 @@
 import { createGlobalStyle } from 'styled-components';
 
 const GlobalStyle = createGlobalStyle`
+  html {
+    font-size: 62.5%
+  }
+
   body {
     margin: 0;
     background: ${({ theme }) => theme.white};
     font-family: ${({ theme }) => theme.font.family};
     color: ${({ theme }) => theme.dark};
     font-weight: ${({ theme }) => theme.font.weight.regular};
-    height: 300vh;
+    font-size: 1.6rem;
   }
 
   *, *::before, *::after {
