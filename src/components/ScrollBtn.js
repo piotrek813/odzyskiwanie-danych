@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
+import media from 'utils/media';
 
 const StyledWrapper = styled.a`
   position: absolute;
@@ -9,6 +10,11 @@ const StyledWrapper = styled.a`
   color: ${({ theme }) => theme.light};
   text-decoration: none;
   padding-top: 70px;
+
+  ${media.desktop`
+      color: ${({ theme }) => theme.dark};
+      transform: translateX(-120px);
+  `}
 `;
 
 const scrollBtnAnimation = keyframes`
@@ -36,6 +42,10 @@ const StyledScrollBtn = styled.span`
   border-bottom: 1px solid ${({ theme }) => theme.light};
   transform: rotate(-45deg);
   animation: ${scrollBtnAnimation} 1.5s ease-out infinite;
+
+  ${media.desktop`
+      border-color: ${({ theme }) => theme.dark};
+  `}
 `;
 
 const ScrollBtn = () => (

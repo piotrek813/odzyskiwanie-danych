@@ -1,12 +1,11 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
-import HeroTemplate from 'templates/HeroTemplate';
 
-// eslint-disable-next-line react/prop-types
 const IndexPage = ({ data }) => (
-  <MainTemplate>
-    <HeroTemplate data={data} />
+  <MainTemplate data={data}>
+    <></>
   </MainTemplate>
 );
 
@@ -21,5 +20,9 @@ export const query = graphql`
     }
   }
 `;
+
+IndexPage.propTypes = {
+  data: PropTypes.objectOf(PropTypes.object).isRequired,
+};
 
 export default IndexPage;

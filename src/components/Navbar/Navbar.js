@@ -24,14 +24,19 @@ const StyledWrapper = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 13px;
+  color: ${({ theme }) => theme.light};
 
   ${media.tablet`
     padding: 34px 50px;
   `}
+
+  ${media.desktop`
+      width: 65%;
+      color: ${({ theme }) => theme.dark};
+  `}
 `;
 
 const StyledLogo = styled.p`
-  color: ${({ theme }) => theme.light};
   z-index: 9999;
 `;
 
@@ -44,7 +49,7 @@ const StyledHamburger = styled(Hamburger)`
 `;
 
 const StyledMenuWrapper = styled(MenuWrapper)`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   position: fixed;
   top: 0;
@@ -54,7 +59,6 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   justify-content: center;
   font-weight: ${({ theme }) => theme.font.weight.medium};
   background: ${({ theme }) => theme.dark};
-  color: ${({ theme }) => theme.light};
   z-index: 9998;
 
   ${media.tablet`
@@ -62,7 +66,6 @@ const StyledMenuWrapper = styled(MenuWrapper)`
     background: none;
     width: auto;
     height: auto;
-    color: ${({ theme }) => theme.dark};
   `}
 `;
 
