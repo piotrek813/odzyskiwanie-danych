@@ -7,7 +7,7 @@ export default {
       heading: {
         section: '3.6rem',
         small: '1.2rem',
-        normal: '2.4rem',
+        normal: '3.2rem',
         big: '6.4rem',
       },
       content: {
@@ -17,7 +17,7 @@ export default {
         big: '2.1rem',
       },
       xs: '0.9rem',
-      btn: '1.3rem',
+      btn: '1.6rem',
     },
     weight: {
       thin: 300,

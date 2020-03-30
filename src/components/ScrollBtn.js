@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import styled, { keyframes } from 'styled-components';
 import media from 'utils/media';
 
@@ -48,11 +49,19 @@ const StyledScrollBtn = styled.span`
   `}
 `;
 
-const ScrollBtn = () => (
-  <StyledWrapper href="#">
+const ScrollBtn = ({ to }) => (
+  <StyledWrapper href={`#${to}`}>
     <StyledScrollBtn />
     Przesuń w dół
   </StyledWrapper>
 );
+
+ScrollBtn.propTypes = {
+  to: PropTypes.string,
+};
+
+ScrollBtn.defaultProps = {
+  to: 'start',
+};
 
 export default ScrollBtn;

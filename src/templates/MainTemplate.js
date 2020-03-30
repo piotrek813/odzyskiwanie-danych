@@ -12,6 +12,7 @@ const MainTemplate = ({ children, data }) => (
       <GlobalStyle />
       <Navbar />
       <HeroTemplate data={data} />
+      <div id="start" />
       {children}
     </>
   </ThemeProvider>

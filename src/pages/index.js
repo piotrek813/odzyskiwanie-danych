@@ -2,10 +2,53 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
+import ServicesTemplate from 'templates/ServicesTemplate';
+
+const content = {
+  services: [
+    {
+      img: 'hdd.jpg',
+      heading: 'Dyski twarde',
+      paragraph:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
+    },
+    {
+      img: 'ssd.jpg',
+      heading: 'Dyski ssd',
+      paragraph:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
+    },
+    {
+      img: 'raid.jpg',
+      heading: 'Macierze raid',
+      paragraph:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
+    },
+    {
+      img: 'dyski-przenosne.jpg',
+      heading: 'Dyski przenośne',
+      paragraph:
+        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
+    },
+  ],
+};
 
 const IndexPage = ({ data }) => (
   <MainTemplate data={data}>
-    <></>
+    <>
+      {content.services.map(({ img, heading, paragraph }, index) => {
+        const isMirror = index % 2 !== 0;
+        return (
+          <ServicesTemplate
+            key={heading}
+            isMirror={isMirror}
+            img={img}
+            heading={heading}
+            paragraph={paragraph}
+          />
+        );
+      })}
+    </>
   </MainTemplate>
 );
 
