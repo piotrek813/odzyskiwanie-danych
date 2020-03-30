@@ -59,6 +59,7 @@ const StyledHeading = styled.h1`
       grid-column: 1;
       grid-row: 1;
       align-self: end;
+      margin: 0;
   `}
 `;
 
