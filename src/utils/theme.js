@@ -2,6 +2,7 @@ export default {
   primary: '#333333',
   light: '#ffffff',
   dark: '#000',
+  gray: '#f7f6f6',
   font: {
     size: {
       heading: {
@@ -11,12 +12,12 @@ export default {
         big: '6.4rem',
       },
       content: {
-        small: '1rem',
+        small: '1.4rem',
         medium: '1.4rem',
         normal: '1.8rem',
         big: '2.1rem',
       },
-      xs: '0.9rem',
+      date: '1.3rem',
       btn: '1.6rem',
     },
     weight: {
