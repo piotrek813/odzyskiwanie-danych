@@ -7,7 +7,7 @@ import Button from 'components/Button';
 
 const StyledWrapper = styled.section`
   height: 100%;
-  background: ${({ theme }) => theme.light};
+  background: ${({ theme }) => theme.white};
   display: flex;
   flex-direction: column;
   /* justify-content: center;

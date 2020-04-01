@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
 import ServicesTemplate from 'templates/ServicesTemplate';
 import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
+import Footer from 'components/Footer';
 
 const content = {
   services: [
@@ -62,6 +63,8 @@ const content = {
       date: '2020-1-21',
     },
   ],
+  footer:
+    'Strona używa plików cookies do śledzenia zachowań użytkowników na stronie. ©2020 CENTRUM ODZYSKIWANIA DANYCH. Warszawa, ul. Opaczewska 43/8',
 };
 
 const IndexPage = ({ data }) => (
@@ -80,6 +83,7 @@ const IndexPage = ({ data }) => (
         );
       })}
       <BlogReferenceTemplate data={content.blog} />
+      <Footer>{content.footer}</Footer>
     </>
   </MainTemplate>
 );

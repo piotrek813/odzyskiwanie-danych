@@ -24,7 +24,7 @@ const StyledWrapper = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 13px;
-  color: ${({ theme }) => theme.light};
+  color: ${({ theme }) => theme.white};
 
   ${media.tablet`
     padding: 34px 50px;
@@ -32,7 +32,7 @@ const StyledWrapper = styled.nav`
 
   ${media.desktop`
       width: 65%;
-      color: ${({ theme }) => theme.dark};
+      color: ${({ theme }) => theme.black};
   `}
 `;
 
@@ -58,7 +58,7 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   align-items: center;
   justify-content: center;
   font-weight: ${({ theme }) => theme.font.weight.medium};
-  background: ${({ theme }) => theme.dark};
+  background: ${({ theme }) => theme.black};
   z-index: 9998;
 
   ${media.tablet`

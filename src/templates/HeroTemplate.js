@@ -35,7 +35,7 @@ const StyledContent = styled.div`
   justify-content: center;
   align-items: center;
   text-align: center;
-  background: ${({ theme }) => theme.light};
+  background: ${({ theme }) => theme.white};
   clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
   padding: 50px;
 
