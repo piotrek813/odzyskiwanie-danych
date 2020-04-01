@@ -37,7 +37,7 @@ const StyledContent = styled.div`
   `}
 `;
 
-const StyledHeading = styled.h1`
+const StyledHeading = styled.h2`
   font-size: ${({ theme }) => theme.font.size.heading.normal};
   margin: 0;
 `;
