@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import PostReference from 'components/PostReference';
 
 const StyledWrapper = styled.section`
-  padding: 40px;
+  padding: 50px;
   background: ${({ theme }) => theme.gray};
 `;
 

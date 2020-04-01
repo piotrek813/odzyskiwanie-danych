@@ -10,6 +10,8 @@ const StyledWrapper = styled.section`
   background: ${({ theme }) => theme.light};
   display: flex;
   flex-direction: column;
+  /* justify-content: center;
+  align-items: center; */
 `;
 
 const StyledImg = styled.img`
@@ -18,6 +20,10 @@ const StyledImg = styled.img`
 
 const StyledContent = styled.div`
   padding: 20px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 `;
 
 const StyledDate = styled.h5`
@@ -33,6 +39,10 @@ const StyledParagraph = styled.p`
   font-size: ${({ theme }) => theme.font.size.content.small};
 `;
 
+const StyledButton = styled(Button)`
+  margin-top: auto;
+`;
+
 const PostReference = ({ img, date, heading, paragraph }) => (
   <StyledWrapper>
     <StyledImg src={require(`../assets/images/${img}`)} alt={heading} />
@@ -40,7 +50,7 @@ const PostReference = ({ img, date, heading, paragraph }) => (
       <StyledDate>{date}</StyledDate>
       <StyledHeading>{heading}</StyledHeading>
       <StyledParagraph>{paragraph}</StyledParagraph>
-      <Button>Czytaj więcej</Button>
+      <StyledButton>Czytaj więcej</StyledButton>
     </StyledContent>
   </StyledWrapper>
 );
