@@ -15,7 +15,7 @@ const StyledHeading = styled.h1`
 const StyledReferenceWrapper = styled.div`
   display: grid;
   grid-gap: 15px;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 `;
 
 const BlogReferenceTemplate = ({ data }) => (

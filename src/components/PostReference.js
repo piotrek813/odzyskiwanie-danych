@@ -4,14 +4,18 @@ import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Button from 'components/Button';
+import media from 'utils/media';
 
 const StyledWrapper = styled.section`
-  height: 100%;
   background: ${({ theme }) => theme.white};
-  display: flex;
-  flex-direction: column;
-  /* justify-content: center;
-  align-items: center; */
+  display: grid;
+  grid-gap: 5px;
+  margin: ${({ isBig }) => (isBig ? '20px 0' : '0')};
+  grid-template-columns: 1fr;
+
+  ${media.tablet`
+      grid-template-columns: ${({ isBig }) => (isBig ? '1fr 1fr' : '1fr')};
+  `}
 `;
 
 const StyledImg = styled.img`
@@ -28,7 +32,7 @@ const StyledContent = styled.div`
 
 const StyledDate = styled.h5`
   font-size: ${({ theme }) => theme.font.size.date};
-  margin: 12px 0;
+  margin: auto 0 12px 0;
 `;
 
 const StyledHeading = styled.h3`
@@ -40,17 +44,17 @@ const StyledParagraph = styled.p`
 `;
 
 const StyledButton = styled(Button)`
-  margin-top: auto;
+  ${({ marginReverse }) => `margin-${marginReverse ? 'bottom' : 'top'}: auto;`}
 `;
 
-const PostReference = ({ img, date, heading, paragraph }) => (
-  <StyledWrapper>
+const PostReference = ({ img, date, heading, paragraph, isBig }) => (
+  <StyledWrapper isBig={isBig}>
     <StyledImg src={require(`../assets/images/${img}`)} alt={heading} />
     <StyledContent>
       <StyledDate>{date}</StyledDate>
       <StyledHeading>{heading}</StyledHeading>
       <StyledParagraph>{paragraph}</StyledParagraph>
-      <StyledButton>Czytaj więcej</StyledButton>
+      <StyledButton marginReverse={isBig}>Czytaj więcej</StyledButton>
     </StyledContent>
   </StyledWrapper>
 );
@@ -60,6 +64,11 @@ PostReference.propTypes = {
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
+  isBig: PropTypes.bool,
+};
+
+PostReference.defaultProps = {
+  isBig: false,
 };
 
 export default PostReference;

@@ -4,9 +4,13 @@ import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
 import ServicesTemplate from 'templates/ServicesTemplate';
 import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
-import Footer from 'components/Footer';
 
 const content = {
+  hero: {
+    heading: 'Odzyskiwanie danych',
+    paragraph:
+      'Masz problem z danymi? Chcesz szybko i za darmo dowiedzieć się jakie będą koszty odzyskiwania danych? Zapraszamy do naszego laboratorium w Warszawie – Szybkie odzyskiwanie danych z dysku, dysku SSD, pendrive, karty pamięci, macierzy RAID.',
+  },
   services: [
     {
       img: 'hdd.jpg',
@@ -63,12 +67,10 @@ const content = {
       date: '2020-1-21',
     },
   ],
-  footer:
-    'Strona używa plików cookies do śledzenia zachowań użytkowników na stronie. ©2020 CENTRUM ODZYSKIWANIA DANYCH. Warszawa, ul. Opaczewska 43/8',
 };
 
 const IndexPage = ({ data }) => (
-  <MainTemplate data={data}>
+  <MainTemplate data={data} hero={content.hero}>
     <>
       {content.services.map(({ img, heading, paragraph }, index) => {
         const isMirror = index % 2 !== 0;
@@ -83,7 +85,6 @@ const IndexPage = ({ data }) => (
         );
       })}
       <BlogReferenceTemplate data={content.blog} />
-      <Footer>{content.footer}</Footer>
     </>
   </MainTemplate>
 );
@@ -92,7 +93,7 @@ export const query = graphql`
   query {
     file(relativePath: { eq: "hero-image-disk.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600, quality: 90) {
+        fluid(maxWidth: 1600, quality: 50) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }

@@ -38,6 +38,7 @@ const StyledContent = styled.div`
   background: ${({ theme }) => theme.white};
   clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
   padding: 50px;
+  width: 100%;
 
   ${media.desktop`
     top: 0;
@@ -53,6 +54,7 @@ const StyledContent = styled.div`
 
 const StyledHeading = styled.h1`
   font-size: ${({ theme }) => theme.font.size.heading.normal};
+  text-transform: uppercase;
 
   ${media.desktop`
       font-size: ${({ theme }) => theme.font.size.heading.big};
@@ -74,7 +76,7 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ data }) => (
+const HeroTemplate = ({ data, heading, paragraph }) => (
   <StyledWrapper>
     <StyledHero
       position="20% 90%"
@@ -82,13 +84,8 @@ const HeroTemplate = ({ data }) => (
       alt="disk hero image"
     />
     <StyledContent>
-      <StyledHeading>ODZYSKIWANIE DANYCH</StyledHeading>
-      <StyledParagraph>
-        Masz problem z danymi? Chcesz szybko i za darmo dowiedzieć się jakie
-        będą koszty odzyskiwania danych? Zapraszamy do naszego laboratorium w
-        Warszawie – Szybkie odzyskiwanie danych z dysku, dysku SSD, pendrive,
-        karty pamięci, macierzy RAID.
-      </StyledParagraph>
+      <StyledHeading>{heading}</StyledHeading>
+      <StyledParagraph>{paragraph}</StyledParagraph>
     </StyledContent>
     <ScrollBtn />
   </StyledWrapper>
@@ -96,6 +93,12 @@ const HeroTemplate = ({ data }) => (
 
 HeroTemplate.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
+  heading: PropTypes.string.isRequired,
+  paragraph: PropTypes.string,
+};
+
+HeroTemplate.defaultProps = {
+  paragraph: '',
 };
 
 export default HeroTemplate;
