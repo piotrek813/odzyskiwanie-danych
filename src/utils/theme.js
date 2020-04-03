@@ -8,6 +8,7 @@ export default {
     size: {
       heading: {
         section: '3.6rem',
+        post: '2.5rem',
         small: '1.2rem',
         normal: '3.2rem',
         big: '6.4rem',

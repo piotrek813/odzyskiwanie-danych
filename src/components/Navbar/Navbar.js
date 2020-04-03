@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 import posed from 'react-pose';
 import media, { sizes } from 'utils/media';
 import Hamburger from './Hamburger';
@@ -16,15 +17,15 @@ const MenuWrapper = posed.div({
 });
 
 const StyledWrapper = styled.nav`
-  position: absolute;
+  position: ${({ isPost }) => (!isPost ? 'absolute' : 'static')};
   top: 0;
   left: 0;
   width: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 13px;
-  color: ${({ theme }) => theme.white};
+  padding: ${({ isPost }) => (!isPost ? '13px' : '13px 39px')};
+  color: ${({ theme, isPost }) => (!isPost ? theme.white : theme.black)};
 
   ${media.tablet`
     padding: 34px 50px;
@@ -32,7 +33,7 @@ const StyledWrapper = styled.nav`
 
   ${media.desktop`
       width: 65%;
-      color: ${({ theme }) => theme.black};
+      color: ${({ theme, isPost }) => (!isPost ? theme.black : theme.white)};
   `}
 `;
 
@@ -57,6 +58,7 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   display: flex;
   align-items: center;
   justify-content: center;
+  color: ${({ theme, isPost }) => (!isPost ? 'inherit' : theme.white)};
   font-weight: ${({ theme }) => theme.font.weight.medium};
   background: ${({ theme }) => theme.black};
   z-index: 9998;
@@ -137,11 +139,17 @@ class Navbar extends Component {
       'blog',
     ];
     const { isMenuOpen, isTablet } = this.state;
+    const { isPost } = this.props;
     return (
-      <StyledWrapper>
+      <StyledWrapper isPost={isPost}>
         <StyledLogo>logo</StyledLogo>
-        <StyledHamburger onClick={this.handleMenuToggle} isOpen={isMenuOpen} />
+        <StyledHamburger
+          isPost={isPost}
+          onClick={this.handleMenuToggle}
+          isOpen={isMenuOpen}
+        />
         <StyledMenuWrapper
+          isPost={isPost}
           isTablet={isTablet}
           pose={isMenuOpen ? 'visible' : 'hidden'}
         >
@@ -155,5 +163,13 @@ class Navbar extends Component {
     );
   }
 }
+
+Navbar.propTypes = {
+  isPost: PropTypes.bool,
+};
+
+Navbar.defaultProps = {
+  isPost: false,
+};
 
 export default Navbar;

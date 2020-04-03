@@ -12,8 +12,8 @@ const InnerHamburger = styled.div`
   position: relative;
   width: 30px;
   height: 2px;
-  background-color: ${({ theme, isOpen }) =>
-    isOpen ? 'transparent' : theme.white};
+  background-color: ${({ theme, isOpen, isPost }) =>
+    isOpen ? 'transparent' : !isPost ? theme.white : theme.black};
   transition: background-color 0.25s ease-in-out;
 
   ::after,
@@ -23,7 +23,8 @@ const InnerHamburger = styled.div`
     left: 0;
     width: 30px;
     height: 2px;
-    background-color: ${({ theme }) => theme.white};
+    background-color: ${({ theme, isOpen, isPost }) =>
+      isOpen ? theme.white : !isPost ? theme.white : theme.black};
     transition: transform 0.25s ease-in-out, background-color 0.25s ease-in-out;
   }
 
@@ -40,14 +41,19 @@ const InnerHamburger = styled.div`
   }
 `;
 
-const Hamburger = ({ isOpen, ...props }) => (
+const Hamburger = ({ isOpen, isPost, ...props }) => (
   <StyledHamburger {...props}>
-    <InnerHamburger isOpen={isOpen} />
+    <InnerHamburger isOpen={isOpen} isPost={isPost} />
   </StyledHamburger>
 );
 
 Hamburger.propTypes = {
   isOpen: PropTypes.bool.isRequired,
+  isPost: PropTypes.bool,
+};
+
+Hamburger.defaultProps = {
+  isPost: false,
 };
 
 export default Hamburger;

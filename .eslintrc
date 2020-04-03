@@ -21,6 +21,7 @@
   },
   "rules": {
     "react/jsx-filename-extension": 0,
-    "react/jsx-props-no-spreading": 0
+    "react/jsx-props-no-spreading": 0,
+    "no-nested-ternary": 0
   }
 }
