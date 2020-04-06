@@ -8,12 +8,12 @@ const StyledWrapper = styled.a`
   bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
-  color: ${({ theme }) => theme.light};
+  color: ${({ theme }) => theme.white};
   text-decoration: none;
   padding-top: 70px;
 
-  ${media.desktop`
-      color: ${({ theme }) => theme.dark};
+  ${media.big`
+      color: ${({ theme }) => theme.black};
       transform: translateX(-120px);
   `}
 `;
@@ -39,13 +39,13 @@ const StyledScrollBtn = styled.span`
   margin-left: -12px;
   width: 24px;
   height: 24px;
-  border-left: 1px solid ${({ theme }) => theme.light};
-  border-bottom: 1px solid ${({ theme }) => theme.light};
+  border-left: 1px solid ${({ theme }) => theme.white};
+  border-bottom: 1px solid ${({ theme }) => theme.white};
   transform: rotate(-45deg);
   animation: ${scrollBtnAnimation} 1.5s ease-out infinite;
 
-  ${media.desktop`
-      border-color: ${({ theme }) => theme.dark};
+  ${media.big`
+      border-color: ${({ theme }) => theme.black};
   `}
 `;
 

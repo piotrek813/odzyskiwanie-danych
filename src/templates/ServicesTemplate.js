@@ -7,11 +7,11 @@ import media from 'utils/media';
 import Button from 'components/Button';
 
 const StyledWrapper = styled.section`
-  ${media.tablet`
+  ${media.small`
       padding: 100px;
   `}
 
-  ${media.desktop`
+  ${media.big`
       display: flex;
       justify-content: center;
       align-items: center;
@@ -23,17 +23,17 @@ const StyledWrapper = styled.section`
 const StyledImg = styled.img`
   width: 100%;
 
-  ${media.desktop`
-      width: 50vw;
+  ${media.big`
+      width: 50%;
   `}
 `;
 
 const StyledContent = styled.div`
   padding: 35px;
 
-  ${media.desktop`
+  ${media.big`
       padding: 50px;
-      width: 50vw;
+      width: 50%;
   `}
 `;
 
@@ -43,7 +43,7 @@ const StyledHeading = styled.h2`
 `;
 
 const StyledParagraph = styled.p`
-  font-size: ${({ theme }) => theme.font.size.content.medium};
+  font-size: ${({ theme }) => theme.font.size.content.small};
   margin: 14px 0;
 `;
 

@@ -1,19 +1,21 @@
 export default {
   primary: '#333333',
-  light: '#ffffff',
-  dark: '#000',
+  white: '#ffffff',
+  black: '#000',
+  dark: '#171219',
   gray: '#f7f6f6',
   font: {
     size: {
       heading: {
         section: '3.6rem',
+        post: '2.5rem',
         small: '1.2rem',
         normal: '3.2rem',
         big: '6.4rem',
       },
       content: {
         small: '1.4rem',
-        medium: '1.4rem',
+        medium: '1.6rem',
         normal: '1.8rem',
         big: '2.1rem',
       },

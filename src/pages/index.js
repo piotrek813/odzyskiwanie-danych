@@ -6,6 +6,11 @@ import ServicesTemplate from 'templates/ServicesTemplate';
 import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
 
 const content = {
+  hero: {
+    heading: 'Odzyskiwanie danych',
+    paragraph:
+      'Masz problem z danymi? Chcesz szybko i za darmo dowiedzieć się jakie będą koszty odzyskiwania danych? Zapraszamy do naszego laboratorium w Warszawie – Szybkie odzyskiwanie danych z dysku, dysku SSD, pendrive, karty pamięci, macierzy RAID.',
+  },
   services: [
     {
       img: 'hdd.jpg',
@@ -65,7 +70,7 @@ const content = {
 };
 
 const IndexPage = ({ data }) => (
-  <MainTemplate data={data}>
+  <MainTemplate data={data} hero={content.hero}>
     <>
       {content.services.map(({ img, heading, paragraph }, index) => {
         const isMirror = index % 2 !== 0;
@@ -88,7 +93,7 @@ export const query = graphql`
   query {
     file(relativePath: { eq: "hero-image-disk.jpg" }) {
       childImageSharp {
-        fluid(maxWidth: 1600, quality: 90) {
+        fluid(maxWidth: 1600, quality: 50) {
           ...GatsbyImageSharpFluid_noBase64
         }
       }

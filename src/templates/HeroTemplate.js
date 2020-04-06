@@ -19,43 +19,66 @@ const StyledHero = styled(Img)`
   left: 0;
   width: 100%;
   z-index: -1;
-  height: ${({ height }) => height || '100vh'};
+  height: ${({ isPost }) => (!isPost ? '100vh' : '30vh')};
 
   img {
     object-fit: ${({ fit }) => fit || 'cover'} !important;
     object-position: ${({ position }) =>
       position || 'center center'} !important;
   }
+
+  ${media.big`
+      height: ${({ isPost }) => (!isPost ? '100vh' : '65vh')};
+  `}
 `;
 
 const StyledContent = styled.div`
-  position: absolute;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  background: ${({ theme }) => theme.light};
-  clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
-  padding: 50px;
+  ${({ theme, isPost }) =>
+    !isPost &&
+    `
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: ${theme.white};
+    clip-path: polygon(0 15%, 100% 0, 100% 85%, 0% 100%);
+  `}
+  padding: ${({ isPost }) => (!isPost ? '50px' : '0 39px')};
+  width: 100%;
 
-  ${media.desktop`
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: left;
+  ${media.big`
+    position: absolute;
+    color: ${({ theme, isPost }) => (!isPost ? 'inherit' : theme.white)};
+    ${({ isPost }) =>
+      !isPost &&
+      `
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+      `}
   `}
 `;
 
 const StyledHeading = styled.h1`
-  font-size: ${({ theme }) => theme.font.size.heading.normal};
+  font-size: ${({ theme, isPost }) =>
+    !isPost ? theme.font.size.heading.normal : theme.font.size.heading.post};
+  text-transform: uppercase;
 
-  ${media.desktop`
+  ${media.small`
+      font-size: ${({ theme, isPost }) =>
+        isPost && theme.font.size.heading.normal}
+  `}
+
+  ${media.big`
       font-size: ${({ theme }) => theme.font.size.heading.big};
+      text-align: ${({ isPost }) => (!isPost ? 'left' : 'center')};
       grid-column: 1;
       grid-row: 1;
       align-self: end;
@@ -64,9 +87,9 @@ const StyledHeading = styled.h1`
 `;
 
 const StyledParagraph = styled.p`
-  font-size: ${({ theme }) => theme.font.size.content.medium};
+  font-size: ${({ theme }) => theme.font.size.content.small};
 
-  ${media.desktop`
+  ${media.big`
       font-size: ${({ theme }) => theme.font.size.heading.medium};
       grid-column: 1;
       grid-row: 2;
@@ -74,28 +97,32 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ data }) => (
+const HeroTemplate = ({ data, heading, paragraph, isPost }) => (
   <StyledWrapper>
+    <StyledContent isPost={isPost}>
+      <StyledHeading isPost={isPost}>{heading}</StyledHeading>
+      <StyledParagraph>{paragraph}</StyledParagraph>
+    </StyledContent>
     <StyledHero
+      isPost={isPost}
       position="20% 90%"
       fluid={data.file.childImageSharp.fluid}
       alt="disk hero image"
     />
-    <StyledContent>
-      <StyledHeading>ODZYSKIWANIE DANYCH</StyledHeading>
-      <StyledParagraph>
-        Masz problem z danymi? Chcesz szybko i za darmo dowiedzieć się jakie
-        będą koszty odzyskiwania danych? Zapraszamy do naszego laboratorium w
-        Warszawie – Szybkie odzyskiwanie danych z dysku, dysku SSD, pendrive,
-        karty pamięci, macierzy RAID.
-      </StyledParagraph>
-    </StyledContent>
-    <ScrollBtn />
+    {!isPost && <ScrollBtn />}
   </StyledWrapper>
 );
 
 HeroTemplate.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
+  heading: PropTypes.string.isRequired,
+  paragraph: PropTypes.string,
+  isPost: PropTypes.bool,
+};
+
+HeroTemplate.defaultProps = {
+  paragraph: '',
+  isPost: false,
 };
 
 export default HeroTemplate;
