@@ -27,12 +27,13 @@ const StyledWrapper = styled.nav`
   padding: ${({ isPost }) => (!isPost ? '13px' : '13px 39px')};
   color: ${({ theme, isPost }) => (!isPost ? theme.white : theme.black)};
 
-  ${media.tablet`
+  ${media.small`
     padding: 34px 50px;
   `}
 
-  ${media.desktop`
-      width: 65%;
+  ${media.big`
+      position: absolute;
+      width: ${({ isPost }) => (!isPost ? '65%' : '100%')};
       color: ${({ theme, isPost }) => (!isPost ? theme.black : theme.white)};
   `}
 `;
@@ -44,7 +45,7 @@ const StyledLogo = styled.p`
 const StyledHamburger = styled(Hamburger)`
   z-index: 9999;
 
-  ${media.tablet`
+  ${media.small`
     display: none;
   `};
 `;
@@ -58,16 +59,21 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: ${({ theme, isPost }) => (!isPost ? 'inherit' : theme.white)};
+  color: ${({ theme }) => theme.white};
   font-weight: ${({ theme }) => theme.font.weight.medium};
   background: ${({ theme }) => theme.black};
   z-index: 9998;
 
-  ${media.tablet`
+  ${media.small`
+    color: ${({ theme, isPost }) => (!isPost ? theme.white : theme.black)};
     position: static;
     background: none;
     width: auto;
     height: auto;
+  `}
+
+  ${media.big`
+      color: ${({ theme, isPost }) => (!isPost ? theme.black : theme.white)};
   `}
 `;
 
@@ -80,7 +86,7 @@ const StyledList = styled.ul`
   justify-content: center;
   align-items: center;
 
-  ${media.tablet`
+  ${media.small`
       flex-direction: row;
   `}
 `;
@@ -91,7 +97,7 @@ const StyledItem = styled.li`
   width: 100%;
   text-align: center;
 
-  ${media.tablet`
+  ${media.small`
     padding: 0 30px;
     padding-right: 0;
     width: auto;
@@ -122,7 +128,7 @@ class Navbar extends Component {
   };
 
   updateWindowDimensions = () => {
-    if (window.innerWidth >= sizes.tablet) {
+    if (window.innerWidth >= sizes.small) {
       this.setState({ isMenuOpen: true });
     } else {
       this.setState({ isMenuOpen: false });

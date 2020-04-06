@@ -15,7 +15,7 @@ export default {
       },
       content: {
         small: '1.4rem',
-        medium: '1.4rem',
+        medium: '1.6rem',
         normal: '1.8rem',
         big: '2.1rem',
       },

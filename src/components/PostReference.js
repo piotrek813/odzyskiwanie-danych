@@ -13,7 +13,7 @@ const StyledWrapper = styled.section`
   margin: ${({ isBig }) => (isBig ? '20px 0' : '0')};
   grid-template-columns: 1fr;
 
-  ${media.tablet`
+  ${media.medium`
       grid-template-columns: ${({ isBig }) => (isBig ? '1fr 1fr' : '1fr')};
   `}
 `;

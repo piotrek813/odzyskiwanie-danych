@@ -14,7 +14,7 @@ const StyledWrapper = styled.div`
 `;
 
 const StyledHero = styled(Img)`
-  position: ${({ isPost }) => (!isPost ? 'absolute' : 'static')};
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -26,6 +26,10 @@ const StyledHero = styled(Img)`
     object-position: ${({ position }) =>
       position || 'center center'} !important;
   }
+
+  ${media.big`
+      height: ${({ isPost }) => (!isPost ? '100vh' : '65vh')};
+  `}
 `;
 
 const StyledContent = styled.div`
@@ -44,15 +48,21 @@ const StyledContent = styled.div`
   padding: ${({ isPost }) => (!isPost ? '50px' : '0 39px')};
   width: 100%;
 
-  ${media.desktop`
-    top: 0;
-    left: 0;
-    bottom: 0;
-    right: 0;
-    clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    text-align: left;
+  ${media.big`
+    position: absolute;
+    color: ${({ theme, isPost }) => (!isPost ? 'inherit' : theme.white)};
+    ${({ isPost }) =>
+      !isPost &&
+      `
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        clip-path: polygon(0 0, 65% 0, 50% 100%, 0% 100%);
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        text-align: left;
+      `}
   `}
 `;
 
@@ -61,8 +71,14 @@ const StyledHeading = styled.h1`
     !isPost ? theme.font.size.heading.normal : theme.font.size.heading.post};
   text-transform: uppercase;
 
-  ${media.desktop`
+  ${media.small`
+      font-size: ${({ theme, isPost }) =>
+        isPost && theme.font.size.heading.normal}
+  `}
+
+  ${media.big`
       font-size: ${({ theme }) => theme.font.size.heading.big};
+      text-align: ${({ isPost }) => (!isPost ? 'left' : 'center')};
       grid-column: 1;
       grid-row: 1;
       align-self: end;
@@ -71,9 +87,9 @@ const StyledHeading = styled.h1`
 `;
 
 const StyledParagraph = styled.p`
-  font-size: ${({ theme }) => theme.font.size.content.medium};
+  font-size: ${({ theme }) => theme.font.size.content.small};
 
-  ${media.desktop`
+  ${media.big`
       font-size: ${({ theme }) => theme.font.size.heading.medium};
       grid-column: 1;
       grid-row: 2;

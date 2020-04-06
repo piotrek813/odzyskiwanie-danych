@@ -12,7 +12,7 @@ const StyledWrapper = styled.a`
   text-decoration: none;
   padding-top: 70px;
 
-  ${media.desktop`
+  ${media.big`
       color: ${({ theme }) => theme.black};
       transform: translateX(-120px);
   `}
@@ -44,7 +44,7 @@ const StyledScrollBtn = styled.span`
   transform: rotate(-45deg);
   animation: ${scrollBtnAnimation} 1.5s ease-out infinite;
 
-  ${media.desktop`
+  ${media.big`
       border-color: ${({ theme }) => theme.black};
   `}
 `;
