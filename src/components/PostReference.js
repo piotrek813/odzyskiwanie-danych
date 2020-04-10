@@ -1,12 +1,13 @@
-/* eslint-disable import/no-dynamic-require */
-/* eslint-disable global-require */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import Img from 'gatsby-image';
+import { Link } from 'gatsby';
 import Button from 'components/Button';
 import media from 'utils/media';
 
 const StyledWrapper = styled.section`
+  position: relative;
   background: ${({ theme }) => theme.white};
   display: grid;
   grid-gap: 5px;
@@ -18,7 +19,7 @@ const StyledWrapper = styled.section`
   `}
 `;
 
-const StyledImg = styled.img`
+const StyledImg = styled(Img)`
   width: 100%;
 `;
 
@@ -44,31 +45,58 @@ const StyledParagraph = styled.p`
 `;
 
 const StyledButton = styled(Button)`
-  ${({ marginReverse }) => `margin-${marginReverse ? 'bottom' : 'top'}: auto;`}
+  ${({ marginreverse }) => `margin-${marginreverse ? 'bottom' : 'top'}: auto;`}
 `;
 
-const PostReference = ({ img, date, heading, paragraph, isBig }) => (
+const StyledLink = styled(Link)`
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
+`;
+
+const PostReference = ({
+  slug,
+  img,
+  date,
+  heading,
+  paragraph,
+  isBig,
+  isSmall,
+}) => (
   <StyledWrapper isBig={isBig}>
-    <StyledImg src={require(`../assets/images/${img}`)} alt={heading} />
+    <StyledImg fluid={img.fluid} alt={heading} />
     <StyledContent>
       <StyledDate>{date}</StyledDate>
       <StyledHeading>{heading}</StyledHeading>
-      <StyledParagraph>{paragraph}</StyledParagraph>
-      <StyledButton marginReverse={isBig}>Czytaj więcej</StyledButton>
+      {!isSmall && (
+        <>
+          <StyledParagraph>{paragraph.substr(0, 300)}</StyledParagraph>
+          <StyledButton to={`/blog/${slug}`} marginreverse={isBig}>
+            Czytaj więcej
+          </StyledButton>
+        </>
+      )}
+      {isSmall && <StyledLink to={`/blog/${slug}`} />}
     </StyledContent>
   </StyledWrapper>
 );
 
 PostReference.propTypes = {
-  img: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
+  img: PropTypes.objectOf(PropTypes.object).isRequired,
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   isBig: PropTypes.bool,
+  isSmall: PropTypes.bool,
 };
 
 PostReference.defaultProps = {
   isBig: false,
+  isSmall: false,
 };
 
 export default PostReference;

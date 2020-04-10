@@ -2,99 +2,69 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
-import ServicesTemplate from 'templates/ServicesTemplate';
+import ServiceSectionTemplate from 'templates/ServiceSectionTemplate';
 import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
 
-const content = {
-  hero: {
-    heading: 'Odzyskiwanie danych',
-    paragraph:
-      'Masz problem z danymi? Chcesz szybko i za darmo dowiedzieć się jakie będą koszty odzyskiwania danych? Zapraszamy do naszego laboratorium w Warszawie – Szybkie odzyskiwanie danych z dysku, dysku SSD, pendrive, karty pamięci, macierzy RAID.',
-  },
-  services: [
-    {
-      img: 'hdd.jpg',
-      heading: 'Dyski twarde',
-      paragraph:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
-    },
-    {
-      img: 'ssd.jpg',
-      heading: 'Dyski ssd',
-      paragraph:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
-    },
-    {
-      img: 'raid.jpg',
-      heading: 'Macierze raid',
-      paragraph:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
-    },
-    {
-      img: 'dyski-przenosne.jpg',
-      heading: 'Dyski przenośne',
-      paragraph:
-        'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nibh sapien, tristique ac suscipit a, suscipit id mi. Suspendisse condimentum elit nulla, sit amet finibus lectus mollis eu. Nunc congue mauris a porttitor convallis. Duis posuere nunc ac rhoncus tristique. Sed in tellus sed nulla tincidunt posuere. Vestibulum dignissim elit non convallis sodales. Sed mattis arcu facilisis, dignissim justo at, ornare lectus. Integer in porttitor libero. Vivamus at erat vel sem facilisis dignissim eget non mi. ',
-    },
-  ],
-  blog: [
-    {
-      img: 'blog1.png',
-      heading: 'Jak odzyskać skasowane dane z dysku SSD i co to jest TRIM?',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-30-12',
-    },
-    {
-      img: 'blog2.png',
-      heading: 'Jakie dyski są najlepsze do macierzy RAID?',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-13-02',
-    },
-    {
-      img: 'blog3.png',
-      heading: 'Odzyskiwanie danych z dysków SSD Sandisk-a ',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-12-12',
-    },
-    {
-      img: 'blog4.png',
-      heading: 'Części do naprawy dysków twardych ',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-1-21',
-    },
-  ],
-};
-
 const IndexPage = ({ data }) => (
-  <MainTemplate data={data} hero={content.hero}>
+  <MainTemplate hero={data.datoCmsHome}>
     <>
-      {content.services.map(({ img, heading, paragraph }, index) => {
-        const isMirror = index % 2 !== 0;
-        return (
-          <ServicesTemplate
-            key={heading}
-            isMirror={isMirror}
-            img={img}
-            heading={heading}
-            paragraph={paragraph}
-          />
-        );
-      })}
-      <BlogReferenceTemplate data={content.blog} />
+      {data.allDatoCmsService.edges.map(
+        ({ node: { hero, heading, excerpt, slug } }, index) => {
+          const isMirror = index % 2 !== 0;
+          return (
+            <ServiceSectionTemplate
+              key={slug}
+              slug={slug}
+              isMirror={isMirror}
+              img={hero}
+              heading={heading}
+              excerpt={excerpt}
+            />
+          );
+        }
+      )}
+      <BlogReferenceTemplate data={data.allDatoCmsPost.edges} />
     </>
   </MainTemplate>
 );
 
 export const query = graphql`
-  query {
-    file(relativePath: { eq: "hero-image-disk.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1600, quality: 50) {
-          ...GatsbyImageSharpFluid_noBase64
+  query HomeQuery {
+    datoCmsHome {
+      heading
+      paragraph
+    }
+    allDatoCmsService(sort: { fields: [position], order: ASC }) {
+      edges {
+        node {
+          slug
+          heading
+          excerpt
+          hero {
+            fluid(maxWidth: 800, imgixParams: { fm: "jpg", auto: "compress" }) {
+              ...GatsbyDatoCmsFluid_noBase64
+            }
+          }
+        }
+      }
+    }
+    allDatoCmsPost(
+      sort: { fields: [meta___firstPublishedAt], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          meta {
+            firstPublishedAt(formatString: "YYYY-MM-DD")
+          }
+          slug
+          hero {
+            fluid(maxWidth: 400, imgixParams: { fm: "jpg", auto: "compress" }) {
+              ...GatsbyDatoCmsFluid_noBase64
+            }
+          }
+          heading
+          content
         }
       }
     }

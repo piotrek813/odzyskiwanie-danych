@@ -73,7 +73,7 @@ const StyledHeading = styled.h1`
 
   ${media.small`
       font-size: ${({ theme, isPost }) =>
-        isPost && theme.font.size.heading.normal}
+        isPost && theme.font.size.heading.normal};
   `}
 
   ${media.big`
@@ -97,27 +97,31 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ data, heading, paragraph, isPost }) => (
-  <StyledWrapper>
-    <StyledContent isPost={isPost}>
-      <StyledHeading isPost={isPost}>{heading}</StyledHeading>
-      <StyledParagraph>{paragraph}</StyledParagraph>
-    </StyledContent>
-    <StyledHero
-      isPost={isPost}
-      position="20% 90%"
-      fluid={data.file.childImageSharp.fluid}
-      alt="disk hero image"
-    />
-    {!isPost && <ScrollBtn />}
-  </StyledWrapper>
-);
+const HeroTemplate = ({ fluid, heading, paragraph, isPost }) => {
+  return (
+    <StyledWrapper>
+      <StyledContent isPost={isPost}>
+        <StyledHeading isPost={isPost}>{heading}</StyledHeading>
+        <StyledParagraph>{paragraph}</StyledParagraph>
+      </StyledContent>
+      <StyledHero
+        isPost={isPost}
+        position="20% 90%"
+        fluid={fluid}
+        alt="disk hero image"
+      />
+      {!isPost && <ScrollBtn />}
+    </StyledWrapper>
+  );
+};
 
 HeroTemplate.propTypes = {
-  data: PropTypes.objectOf(PropTypes.object).isRequired,
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string,
   isPost: PropTypes.bool,
+  fluid: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
 };
 
 HeroTemplate.defaultProps = {

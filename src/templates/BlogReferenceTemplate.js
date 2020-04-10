@@ -22,15 +22,26 @@ const BlogReferenceTemplate = ({ data }) => (
   <StyledWrapper>
     <StyledHeading>Blog</StyledHeading>
     <StyledReferenceWrapper>
-      {data.map(({ heading, img, date, paragraph }) => (
-        <PostReference
-          key={heading}
-          img={img}
-          date={date}
-          heading={heading}
-          paragraph={paragraph}
-        />
-      ))}
+      {data.map(
+        ({
+          node: {
+            slug,
+            heading,
+            hero,
+            meta: { firstPublishedAt },
+            content,
+          },
+        }) => (
+          <PostReference
+            key={slug}
+            slug={slug}
+            img={hero}
+            date={firstPublishedAt}
+            heading={heading}
+            paragraph={content}
+          />
+        )
+      )}
     </StyledReferenceWrapper>
   </StyledWrapper>
 );

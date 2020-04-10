@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
+import { Link } from 'gatsby';
 import posed from 'react-pose';
 import media, { sizes } from 'utils/media';
 import Hamburger from './Hamburger';
@@ -38,8 +39,9 @@ const StyledWrapper = styled.nav`
   `}
 `;
 
-const StyledLogo = styled.p`
+const StyledLogo = styled.span`
   z-index: 9999;
+  font-weight: ${({ theme }) => theme.font.weight.bold};
 `;
 
 const StyledHamburger = styled(Hamburger)`
@@ -104,6 +106,11 @@ const StyledItem = styled.li`
   `}
 `;
 
+const StyledLink = styled(Link)`
+  color: inherit;
+  text-decoration: none;
+`;
+
 class Navbar extends Component {
   constructor() {
     super();
@@ -137,18 +144,25 @@ class Navbar extends Component {
 
   render() {
     const navItems = [
-      'HDD',
-      'SSD',
-      'RAID',
-      'Dyski przenośne',
-      'kontakt',
-      'blog',
+      { label: 'HDD', to: '/dyski-hdd' },
+      { label: 'SSD', to: '/dyski-ssd' },
+      { label: 'RAID', to: '/macierze-raid' },
+      { label: 'Dyski przenośne', to: '/dyski-przenosne' },
+      { label: 'blog', to: '/blog' },
+      { label: 'kontakt', to: '/contact' },
+      { label: 'cennik', to: '/pricing' },
     ];
     const { isMenuOpen, isTablet } = this.state;
     const { isPost } = this.props;
     return (
       <StyledWrapper isPost={isPost}>
-        <StyledLogo>logo</StyledLogo>
+        <StyledLogo>
+          <StyledLink to="/">
+            All Data
+            <br />
+            Recovery
+          </StyledLink>
+        </StyledLogo>
         <StyledHamburger
           isPost={isPost}
           onClick={this.handleMenuToggle}
@@ -161,7 +175,9 @@ class Navbar extends Component {
         >
           <StyledList>
             {navItems.map((item) => (
-              <StyledItem key={item}>{item}</StyledItem>
+              <StyledItem key={item.to}>
+                <StyledLink to={item.to}>{item.label}</StyledLink>
+              </StyledItem>
             ))}
           </StyledList>
         </StyledMenuWrapper>
