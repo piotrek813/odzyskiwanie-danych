@@ -25,7 +25,7 @@ const StyledMain = styled.main`
     width: 100%;
 
     ${media.small`
-        width: 60%
+        width: 60%;
     `}
   }
 `;
@@ -37,11 +37,7 @@ const MainTemplate = ({ children, data, heading, date }) => (
       <Navbar isPost />
       <HeroTemplate isPost data={data} heading={heading} date={date} />
       <StyledMain>{children}</StyledMain>
-      <Footer>
-        Strona używa plików cookies do śledzenia zachowań użytkowników na
-        stronie. ©2020 CENTRUM ODZYSKIWANIA DANYCH. Warszawa, ul. Opaczewska
-        43/8
-      </Footer>
+      <Footer />
     </>
   </ThemeProvider>
 );

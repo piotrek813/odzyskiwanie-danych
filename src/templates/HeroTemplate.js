@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import media from 'utils/media';
 import Img from 'gatsby-image';
 import ScrollBtn from 'components/ScrollBtn';
+import { useStaticQuery, graphql } from 'gatsby';
 
 const StyledWrapper = styled.div`
   position: relative;
@@ -73,7 +74,7 @@ const StyledHeading = styled.h1`
 
   ${media.small`
       font-size: ${({ theme, isPost }) =>
-        isPost && theme.font.size.heading.normal}
+        isPost && theme.font.size.heading.normal};
   `}
 
   ${media.big`
@@ -97,24 +98,37 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ data, heading, paragraph, isPost }) => (
-  <StyledWrapper>
-    <StyledContent isPost={isPost}>
-      <StyledHeading isPost={isPost}>{heading}</StyledHeading>
-      <StyledParagraph>{paragraph}</StyledParagraph>
-    </StyledContent>
-    <StyledHero
-      isPost={isPost}
-      position="20% 90%"
-      fluid={data.file.childImageSharp.fluid}
-      alt="disk hero image"
-    />
-    {!isPost && <ScrollBtn />}
-  </StyledWrapper>
-);
+const HeroTemplate = ({ heading, paragraph, isPost }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      datoCmsHome {
+        hero {
+          fluid(maxWidth: 1600, imgixParams: { fm: "jpg", auto: "compress" }) {
+            ...GatsbyDatoCmsFluid
+          }
+        }
+      }
+    }
+  `);
+
+  return (
+    <StyledWrapper>
+      <StyledContent isPost={isPost}>
+        <StyledHeading isPost={isPost}>{heading}</StyledHeading>
+        <StyledParagraph>{paragraph}</StyledParagraph>
+      </StyledContent>
+      <StyledHero
+        isPost={isPost}
+        position="20% 90%"
+        fluid={data.datoCmsHome.hero.fluid}
+        alt="disk hero image"
+      />
+      {!isPost && <ScrollBtn />}
+    </StyledWrapper>
+  );
+};
 
 HeroTemplate.propTypes = {
-  data: PropTypes.objectOf(PropTypes.object).isRequired,
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string,
   isPost: PropTypes.bool,
