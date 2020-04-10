@@ -1,9 +1,8 @@
-/* eslint-disable global-require */
-/* eslint-disable import/no-dynamic-require */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import media from 'utils/media';
+import Img from 'gatsby-image';
 import Button from 'components/Button';
 
 const StyledWrapper = styled.section`
@@ -20,7 +19,7 @@ const StyledWrapper = styled.section`
   `}
 `;
 
-const StyledImg = styled.img`
+const StyledImg = styled(Img)`
   width: 100%;
 
   ${media.big`
@@ -39,6 +38,7 @@ const StyledContent = styled.div`
 
 const StyledHeading = styled.h2`
   font-size: ${({ theme }) => theme.font.size.heading.normal};
+  text-transform: uppercase;
   margin: 0;
 `;
 
@@ -47,24 +47,25 @@ const StyledParagraph = styled.p`
   margin: 14px 0;
 `;
 
-const ServicesTemplate = ({ img, heading, paragraph, isMirror }) => {
+const ServiceSectionTemplate = ({ img, heading, excerpt, slug, isMirror }) => {
   return (
     <StyledWrapper isMirror={isMirror}>
-      <StyledImg src={require(`../assets/images/${img}`)} alt={heading} />
+      <StyledImg fluid={img.fluid} alt={heading} />
       <StyledContent>
         <StyledHeading>{heading}</StyledHeading>
-        <StyledParagraph>{paragraph}</StyledParagraph>
-        <Button>Czytaj więcej</Button>
+        <StyledParagraph>{excerpt}</StyledParagraph>
+        <Button to={`/${slug}`}>Czytaj więcej</Button>
       </StyledContent>
     </StyledWrapper>
   );
 };
 
-ServicesTemplate.propTypes = {
-  img: PropTypes.string.isRequired,
+ServiceSectionTemplate.propTypes = {
+  img: PropTypes.objectOf(PropTypes.object).isRequired,
   heading: PropTypes.string.isRequired,
-  paragraph: PropTypes.string.isRequired,
+  excerpt: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   isMirror: PropTypes.bool.isRequired,
 };
 
-export default ServicesTemplate;
+export default ServiceSectionTemplate;

@@ -1,46 +1,10 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import { HelmetDatoCms } from 'gatsby-source-datocms';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
 import PostReference from '../components/PostReference';
-
-const content = {
-  hero: {
-    heading: 'Blog',
-    paragraph: '',
-  },
-  posts: [
-    {
-      img: 'blog1.png',
-      heading: 'Jak odzyskać skasowane dane z dysku SSD i co to jest TRIM?',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-30-12',
-    },
-    {
-      img: 'blog2.png',
-      heading: 'Jakie dyski są najlepsze do macierzy RAID?',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-13-02',
-    },
-    {
-      img: 'blog3.png',
-      heading: 'Odzyskiwanie danych z dysków SSD Sandisk-a ',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-12-12',
-    },
-    {
-      img: 'blog4.png',
-      heading: 'Części do naprawy dysków twardych ',
-      paragraph:
-        'Nunc sagittis, ligula a porttitor auctor, nunc ex dapibus nisl, quis pharetra urna mi quis neque. Integer tincidunt porta mauris eu scelerisquez',
-      date: '2020-1-21',
-    },
-  ],
-};
 
 const StyledPostsWrapper = styled.main`
   width: 75%;
@@ -52,28 +16,57 @@ const StyledPostsWrapper = styled.main`
 `;
 
 const BlogPage = ({ data }) => (
-  <MainTemplate data={data} hero={content.hero}>
+  <MainTemplate hero={data.datoCmsBlog}>
+    <HelmetDatoCms seo={data.datoCmsBlog.seoMetaTags} />
     <StyledPostsWrapper>
-      {content.posts.map(({ img, date, heading, paragraph }) => (
-        <PostReference
-          key={heading}
-          img={img}
-          date={date}
-          heading={heading}
-          paragraph={paragraph}
-          isBig
-        />
-      ))}
+      {data.allDatoCmsPost.edges.map(
+        ({
+          node: {
+            slug,
+            hero,
+            meta: { firstPublishedAt },
+            heading,
+            content,
+          },
+        }) => (
+          <PostReference
+            key={slug}
+            slug={slug}
+            img={hero}
+            date={firstPublishedAt}
+            heading={heading}
+            paragraph={content}
+            isBig
+          />
+        )
+      )}
     </StyledPostsWrapper>
   </MainTemplate>
 );
 
 export const query = graphql`
-  query {
-    file(relativePath: { eq: "hero-image-disk.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 1600, quality: 90) {
-          ...GatsbyImageSharpFluid_noBase64
+  query BlogQuery {
+    datoCmsBlog {
+      seoMetaTags {
+        ...GatsbyDatoCmsSeoMetaTags
+      }
+      heading
+      paragraph
+    }
+    allDatoCmsPost(sort: { fields: [meta___firstPublishedAt], order: DESC }) {
+      edges {
+        node {
+          meta {
+            firstPublishedAt(formatString: "YYYY-MM-DD")
+          }
+          slug
+          hero {
+            fluid {
+              ...GatsbyDatoCmsFluid_noBase64
+            }
+          }
+          heading
+          content
         }
       }
     }
