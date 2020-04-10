@@ -1,12 +1,16 @@
 import React from 'react';
 import { graphql } from 'gatsby';
+import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import MainTemplate from 'templates/MainTemplate';
-import ServicesTemplate from 'templates/ServicesTemplate';
-import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
+import PostReference from '../components/PostReference';
 
 const content = {
-  blog: [
+  hero: {
+    heading: 'Blog',
+    paragraph: '',
+  },
+  posts: [
     {
       img: 'blog1.png',
       heading: 'Jak odzyskać skasowane dane z dysku SSD i co to jest TRIM?',
@@ -38,52 +42,46 @@ const content = {
   ],
 };
 
-const IndexPage = ({ data }) => (
-  <MainTemplate hero={data.datoCmsHome}>
-    <>
-      {data.allDatoCmsService.edges.map(
-        ({ node: { img, heading, paragraph } }, index) => {
-          const isMirror = index % 2 !== 0;
-          return (
-            <ServicesTemplate
-              key={heading}
-              isMirror={isMirror}
-              img={img}
-              heading={heading}
-              paragraph={paragraph}
-            />
-          );
-        }
-      )}
-      <BlogReferenceTemplate data={content.blog} />
-    </>
+const StyledPostsWrapper = styled.main`
+  width: 75%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const BlogPage = ({ data }) => (
+  <MainTemplate data={data} hero={content.hero}>
+    <StyledPostsWrapper>
+      {content.posts.map(({ img, date, heading, paragraph }) => (
+        <PostReference
+          key={heading}
+          img={img}
+          date={date}
+          heading={heading}
+          paragraph={paragraph}
+          isBig
+        />
+      ))}
+    </StyledPostsWrapper>
   </MainTemplate>
 );
 
 export const query = graphql`
-  query HomeQuery {
-    datoCmsHome {
-      heading
-      paragraph
-    }
-    allDatoCmsService {
-      edges {
-        node {
-          heading
-          paragraph
-          img {
-            fluid(maxWidth: 800, imgixParams: { fm: "jpg", auto: "compress" }) {
-              ...GatsbyDatoCmsFluid
-            }
-          }
+  query {
+    file(relativePath: { eq: "hero-image-disk.jpg" }) {
+      childImageSharp {
+        fluid(maxWidth: 1600, quality: 90) {
+          ...GatsbyImageSharpFluid_noBase64
         }
       }
     }
   }
 `;
 
-IndexPage.propTypes = {
+BlogPage.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
 };
 
-export default IndexPage;
+export default BlogPage;
