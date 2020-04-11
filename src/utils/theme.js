@@ -1,7 +1,6 @@
 export default {
   white: '#ffffff',
   black: '#000',
-  // dark: '#171219',
   primary: '#5c6672',
   lightenPrimary: '#9aa6b5',
   gray: '#f7f6f6',
@@ -24,7 +23,6 @@ export default {
       btn: '1.6rem',
     },
     weight: {
-      thin: 300,
       regular: 400,
       medium: 500,
       bold: 700,

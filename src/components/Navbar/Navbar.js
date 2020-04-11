@@ -149,8 +149,8 @@ class Navbar extends Component {
       { label: 'RAID', to: '/macierze-raid' },
       { label: 'Dyski przenośne', to: '/dyski-przenosne' },
       { label: 'blog', to: '/blog' },
-      { label: 'kontakt', to: '/contact' },
-      { label: 'cennik', to: '/pricing' },
+      { label: 'kontakt', to: '/kontakt' },
+      { label: 'cennik', to: '/cennik' },
     ];
     const { isMenuOpen, isTablet } = this.state;
     const { isPost } = this.props;
