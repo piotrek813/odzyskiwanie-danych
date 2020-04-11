@@ -23,7 +23,12 @@ const Template = ({ children, hero }) => {
   return (
     <ThemeProvider theme={theme}>
       <>
-        <HelmetDatoCms seo={data.datoCmsHome.seoMetaTags} />
+        <HelmetDatoCms seo={data.datoCmsHome.seoMetaTags}>
+          <link
+            href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap&subset=latin-ext"
+            rel="stylesheet"
+          />
+        </HelmetDatoCms>
         <GlobalStyle />
         <Navbar isPost={hero.isPost} />
         <HeroTemplate {...hero} />

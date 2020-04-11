@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-import 'typeface-montserrat';
 
 const GlobalStyle = createGlobalStyle`
   html {
