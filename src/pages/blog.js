@@ -24,6 +24,8 @@ const BlogPage = ({ data }) => (
           node: {
             slug,
             hero,
+            title,
+            alt,
             meta: { firstPublishedAt },
             heading,
             content,
@@ -33,6 +35,8 @@ const BlogPage = ({ data }) => (
             key={slug}
             slug={slug}
             img={hero}
+            alt={alt}
+            title={title}
             date={firstPublishedAt}
             heading={heading}
             paragraph={content}
@@ -64,6 +68,8 @@ export const query = graphql`
             fluid {
               ...GatsbyDatoCmsFluid_noBase64
             }
+            alt
+            title
           }
           heading
           content

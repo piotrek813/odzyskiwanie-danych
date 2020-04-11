@@ -97,7 +97,7 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ fluid, heading, paragraph, isPost }) => {
+const HeroTemplate = ({ fluid, alt, title, heading, paragraph, isPost }) => {
   return (
     <StyledWrapper>
       <StyledContent isPost={isPost}>
@@ -108,7 +108,8 @@ const HeroTemplate = ({ fluid, heading, paragraph, isPost }) => {
         isPost={isPost}
         position="20% 90%"
         fluid={fluid}
-        alt="disk hero image"
+        alt={alt}
+        title={title}
       />
       {!isPost && <ScrollBtn />}
     </StyledWrapper>
@@ -122,6 +123,8 @@ HeroTemplate.propTypes = {
   fluid: PropTypes.objectOf(
     PropTypes.oneOfType([PropTypes.number, PropTypes.string])
   ).isRequired,
+  alt: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
 HeroTemplate.defaultProps = {

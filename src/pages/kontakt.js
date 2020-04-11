@@ -50,7 +50,7 @@ const ContactPage = ({ data: { datoCmsContact } }) => (
     <StyledWrapper>
       <StyledIframe
         title="map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.772123085558!2d20.959745116148493!3d52.211188479756935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecca85746ce63%3A0xf826ff243b5fc8c2!2sOpaczewska%2043%2C%2002-201%20Warszawa%2C%20Polska!5e0!3m2!1spl!2sus!4v1586353080640!5m2!1spl!2sus"
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d611.4879840210169!2d21.013208120154317!3d52.18974636362674!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471932d5a7467eb9%3A0x110920f4e4caee14!2sZygmunta%20Modzelewskiego%2063%2C%2002-679%20Warszawa%2C%20Polska!5e0!3m2!1spl!2sus!4v1586604088496!5m2!1spl!2sus"
       />
       <StyledContactWrapper>
         <ContactItem

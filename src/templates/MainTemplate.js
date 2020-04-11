@@ -11,6 +11,8 @@ const MainTemplate = ({ children, hero }) => {
           fluid(maxWidth: 1600, imgixParams: { fm: "jpg", auto: "compress" }) {
             ...GatsbyDatoCmsFluid_noBase64
           }
+          alt
+          title
         }
       }
     }
