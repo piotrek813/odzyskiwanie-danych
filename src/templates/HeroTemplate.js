@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import media from 'utils/media';
 import Img from 'gatsby-image';
 import ScrollBtn from 'components/ScrollBtn';
-import { useStaticQuery, graphql } from 'gatsby';
 
 const StyledWrapper = styled.div`
   position: relative;
