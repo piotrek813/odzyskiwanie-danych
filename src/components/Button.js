@@ -5,14 +5,16 @@ import { Link } from 'gatsby';
 
 const StyledWrapper = styled.button`
   background: none;
-  border: 2px solid ${({ theme }) => theme.black};
-  padding: 10px 30px;
-  font-size: ${({ theme }) => theme.font.size.btn};
-  font-weight: ${({ theme }) => theme.font.weight.medium};
-  display: inline-block;
+  padding: 0;
+  border: 0;
 `;
 
 const StyledLink = styled(Link)`
+  padding: 10px 30px;
+  border: 2px solid ${({ theme }) => theme.black};
+  font-size: ${({ theme }) => theme.font.size.btn};
+  font-weight: ${({ theme }) => theme.font.weight.medium};
+  display: inline-block;
   color: inherit;
   text-decoration: none;
 `;
