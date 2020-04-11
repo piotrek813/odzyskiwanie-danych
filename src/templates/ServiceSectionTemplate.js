@@ -47,24 +47,25 @@ const StyledParagraph = styled.p`
   margin: 14px 0;
 `;
 
-const ServicesTemplate = ({ img, heading, paragraph, isMirror }) => {
+const ServiceSectionTemplate = ({ img, heading, excerpt, slug, isMirror }) => {
   return (
     <StyledWrapper isMirror={isMirror}>
       <StyledImg fluid={img.fluid} alt={heading} />
       <StyledContent>
         <StyledHeading>{heading}</StyledHeading>
-        <StyledParagraph>{paragraph}</StyledParagraph>
-        <Button>Czytaj więcej</Button>
+        <StyledParagraph>{excerpt}</StyledParagraph>
+        <Button to={`/${slug}`}>Czytaj więcej</Button>
       </StyledContent>
     </StyledWrapper>
   );
 };
 
-ServicesTemplate.propTypes = {
+ServiceSectionTemplate.propTypes = {
   img: PropTypes.objectOf(PropTypes.object).isRequired,
   heading: PropTypes.string.isRequired,
-  paragraph: PropTypes.string.isRequired,
+  excerpt: PropTypes.string.isRequired,
+  slug: PropTypes.string.isRequired,
   isMirror: PropTypes.bool.isRequired,
 };
 
-export default ServicesTemplate;
+export default ServiceSectionTemplate;

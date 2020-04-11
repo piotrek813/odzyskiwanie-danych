@@ -40,19 +40,19 @@ const StyledMain = styled.main`
   }
 `;
 
-const PostTemplate = ({ data: { datoCmsPost, allDatoCmsPost } }) => (
+const PostTemplate = ({ data: { datoCmsService, allDatoCmsPost } }) => (
   <Template
     hero={{
-      ...datoCmsPost.hero,
-      heading: datoCmsPost.heading,
+      ...datoCmsService.hero,
+      heading: datoCmsService.heading,
       isPost: true,
     }}
   >
-    <HelmetDatoCms seo={datoCmsPost.seoMetaTags} />
+    <HelmetDatoCms seo={datoCmsService.seoMetaTags} />
     <StyledWrapper>
       <StyledMain
         dangerouslySetInnerHTML={{
-          __html: datoCmsPost.contentNode.childMarkdownRemark.html,
+          __html: datoCmsService.contentNode.childMarkdownRemark.html,
         }}
       />
       <StyledAside>
@@ -87,8 +87,8 @@ PostTemplate.propTypes = {
 };
 
 export const query = graphql`
-  query PostQuery($slug: String!) {
-    datoCmsPost(slug: { eq: $slug }) {
+  query ServiceQuery($slug: String!) {
+    datoCmsService(slug: { eq: $slug }) {
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }

@@ -57,6 +57,7 @@ module.exports = {
         icon: `src/assets/images/logo_all_data_recovery.png`,
       },
     },
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-source-datocms`,
       options: {

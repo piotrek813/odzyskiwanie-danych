@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import media from 'utils/media';
 
 const StyledFooter = styled.footer`
-  background: ${({ theme }) => theme.dark};
+  background: ${({ theme }) => theme.primary};
   font-size: ${({ theme }) => theme.font.size.content.small};
   color: ${({ theme }) => theme.white};
   text-align: center;

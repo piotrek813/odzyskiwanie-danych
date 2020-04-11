@@ -98,19 +98,7 @@ const StyledParagraph = styled.p`
   `}
 `;
 
-const HeroTemplate = ({ heading, paragraph, isPost }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      datoCmsHome {
-        hero {
-          fluid(maxWidth: 1600, imgixParams: { fm: "jpg", auto: "compress" }) {
-            ...GatsbyDatoCmsFluid
-          }
-        }
-      }
-    }
-  `);
-
+const HeroTemplate = ({ fluid, heading, paragraph, isPost }) => {
   return (
     <StyledWrapper>
       <StyledContent isPost={isPost}>
@@ -120,7 +108,7 @@ const HeroTemplate = ({ heading, paragraph, isPost }) => {
       <StyledHero
         isPost={isPost}
         position="20% 90%"
-        fluid={data.datoCmsHome.hero.fluid}
+        fluid={fluid}
         alt="disk hero image"
       />
       {!isPost && <ScrollBtn />}
@@ -132,6 +120,9 @@ HeroTemplate.propTypes = {
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string,
   isPost: PropTypes.bool,
+  fluid: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+  ).isRequired,
 };
 
 HeroTemplate.defaultProps = {
