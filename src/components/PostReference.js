@@ -60,8 +60,6 @@ const StyledLink = styled(Link)`
 const PostReference = ({
   slug,
   img,
-  title,
-  alt,
   date,
   heading,
   paragraph,
@@ -69,7 +67,7 @@ const PostReference = ({
   isSmall,
 }) => (
   <StyledWrapper isBig={isBig}>
-    <StyledImg fluid={img.fluid} alt={alt} title={title} />
+    <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
     <StyledContent>
       <StyledDate>{date}</StyledDate>
       <StyledHeading>{heading}</StyledHeading>
@@ -88,9 +86,9 @@ const PostReference = ({
 
 PostReference.propTypes = {
   slug: PropTypes.string.isRequired,
-  img: PropTypes.objectOf(PropTypes.object).isRequired,
-  title: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  img: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  ).isRequired,
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

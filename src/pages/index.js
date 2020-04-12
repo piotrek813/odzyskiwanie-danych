@@ -9,7 +9,7 @@ const IndexPage = ({ data }) => (
   <MainTemplate hero={data.datoCmsHome}>
     <>
       {data.allDatoCmsService.edges.map(
-        ({ node: { hero, title, alt, heading, excerpt, slug } }, index) => {
+        ({ node: { hero, heading, excerpt, slug } }, index) => {
           const isMirror = index % 2 !== 0;
           return (
             <ServiceSectionTemplate
@@ -17,8 +17,6 @@ const IndexPage = ({ data }) => (
               slug={slug}
               isMirror={isMirror}
               img={hero}
-              title={title}
-              alt={alt}
               heading={heading}
               excerpt={excerpt}
             />
@@ -46,6 +44,8 @@ export const query = graphql`
             fluid(maxWidth: 800, imgixParams: { fm: "jpg", auto: "compress" }) {
               ...GatsbyDatoCmsFluid_noBase64
             }
+            alt
+            title
           }
         }
       }
@@ -68,7 +68,11 @@ export const query = graphql`
             title
           }
           heading
-          content
+          content {
+            ... on DatoCmsText {
+              text
+            }
+          }
         }
       }
     }

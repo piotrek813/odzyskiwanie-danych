@@ -32,7 +32,6 @@ const Template = ({ children, hero }) => {
         <GlobalStyle />
         <Navbar isPost={hero.isPost} />
         <HeroTemplate {...hero} />
-        <div id="start" />
         {children}
         <Footer />
       </>

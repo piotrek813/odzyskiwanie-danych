@@ -38,7 +38,7 @@ const BlogReferenceTemplate = ({ data }) => (
             img={hero}
             date={firstPublishedAt}
             heading={heading}
-            paragraph={content}
+            paragraph={content[0].text}
           />
         )
       )}

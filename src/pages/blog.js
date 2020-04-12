@@ -16,7 +16,12 @@ const StyledPostsWrapper = styled.main`
 `;
 
 const BlogPage = ({ data }) => (
-  <MainTemplate hero={data.datoCmsBlog}>
+  <MainTemplate
+    hero={{
+      heading: data.datoCmsBlog.heading,
+      paragraph: data.datoCmsBlog.paragraph,
+    }}
+  >
     <HelmetDatoCms seo={data.datoCmsBlog.seoMetaTags} />
     <StyledPostsWrapper>
       {data.allDatoCmsPost.edges.map(
@@ -39,7 +44,7 @@ const BlogPage = ({ data }) => (
             title={title}
             date={firstPublishedAt}
             heading={heading}
-            paragraph={content}
+            paragraph={content[0].text}
             isBig
           />
         )
@@ -72,7 +77,11 @@ export const query = graphql`
             title
           }
           heading
-          content
+          content {
+            ... on DatoCmsText {
+              text
+            }
+          }
         }
       }
     }

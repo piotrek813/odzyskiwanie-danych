@@ -47,18 +47,10 @@ const StyledParagraph = styled.p`
   margin: 14px 0;
 `;
 
-const ServiceSectionTemplate = ({
-  img,
-  title,
-  alt,
-  heading,
-  excerpt,
-  slug,
-  isMirror,
-}) => {
+const ServiceSectionTemplate = ({ img, heading, excerpt, slug, isMirror }) => {
   return (
     <StyledWrapper isMirror={isMirror}>
-      <StyledImg fluid={img.fluid} alt={alt} title={title} />
+      <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
       <StyledContent>
         <StyledHeading>{heading}</StyledHeading>
         <StyledParagraph>{excerpt}</StyledParagraph>
@@ -69,9 +61,9 @@ const ServiceSectionTemplate = ({
 };
 
 ServiceSectionTemplate.propTypes = {
-  img: PropTypes.objectOf(PropTypes.object).isRequired,
-  title: PropTypes.string.isRequired,
-  alt: PropTypes.string.isRequired,
+  img: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  ).isRequired,
   heading: PropTypes.string.isRequired,
   excerpt: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,
