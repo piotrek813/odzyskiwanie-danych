@@ -63,12 +63,12 @@ const PostReference = ({
   isSmall,
 }) => (
   <StyledWrapper isBig={isBig}>
-    <Link to={`blog/${slug}`}>
+    <Link to={`/blog/${slug}`}>
       <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
     </Link>
     <StyledContent>
       <StyledDate>{date}</StyledDate>
-      <StyledLink to={`blog/${slug}`}>
+      <StyledLink to={`/blog/${slug}`}>
         <StyledHeading>{heading}</StyledHeading>
       </StyledLink>
       {!isSmall && (

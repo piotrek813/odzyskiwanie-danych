@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import media from 'utils/media';
 import Template from 'templates/Template';
 import SideBarPost from 'components/SideBarPost';
+import Logo from 'assets/images/logo_all_data_recovery.png';
 
 const StyledWrapper = styled.div`
   width: 90%;
@@ -58,7 +59,33 @@ const PostTemplate = ({ data: { datoCmsService } }) => (
       isPost: true,
     }}
   >
-    <HelmetDatoCms seo={datoCmsService.seoMetaTags} />
+    <HelmetDatoCms seo={datoCmsService.seoMetaTags}>
+      <script type="application/ld+json">{`
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "headline": ${datoCmsService.heading},
+          "description": ${datoCmsService.seoMetaTags.tags[3].attributes.content},
+          "image": ${datoCmsService.hero},
+          "author": {
+            "@type": "Organization",
+            "name": "All Data Recovery"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "All Data Recovery",
+            "logo": {
+              "@type": "ImageObject",
+              "url": ${Logo},
+              "width": 232,
+              "height": 110,
+            }
+          },
+          "datePublished": ${datoCmsService.meta.publishedAt},
+          "dateModified": ${datoCmsService.meta.updatedAt}
+        }
+    `}</script>
+    </HelmetDatoCms>
     <StyledWrapper>
       <div>
         <header>
@@ -94,6 +121,10 @@ export const query = graphql`
     datoCmsService(slug: { eq: $slug }) {
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
+      }
+      meta {
+        updatedAt(formatString: "YYYY-MM-DD")
+        publishedAt(formatString: "YYYY-MM-DD")
       }
       heading
       content {
