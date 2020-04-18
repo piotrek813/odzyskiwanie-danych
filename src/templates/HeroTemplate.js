@@ -20,12 +20,17 @@ const StyledHero = styled(Img)`
   width: 100%;
   z-index: -1;
   height: ${({ isPost }) => (!isPost ? '100vh' : '30vh')};
+  margin-top: ${({ isPost }) => (!isPost ? '0' : '59px')};
 
   img {
     object-fit: ${({ fit }) => fit || 'cover'} !important;
     object-position: ${({ position }) =>
       position || 'center center'} !important;
   }
+
+  ${media.small`
+      margin-top: ${({ isPost }) => (!isPost ? '0' : '60px')};
+  `}
 
   ${media.big`
       height: ${({ isPost }) => (!isPost ? '100vh' : '65vh')};
@@ -100,17 +105,13 @@ const StyledParagraph = styled.p`
 const HeroTemplate = ({ fluid, alt, title, heading, paragraph, isPost }) => {
   return (
     <StyledWrapper>
-      <StyledContent isPost={isPost}>
-        <StyledHeading isPost={isPost}>{heading}</StyledHeading>
-        <StyledParagraph>{paragraph}</StyledParagraph>
-      </StyledContent>
-      <StyledHero
-        isPost={isPost}
-        position="20% 90%"
-        fluid={fluid}
-        alt={alt}
-        title={title}
-      />
+      {!isPost && (
+        <StyledContent isPost={isPost}>
+          <StyledHeading isPost={isPost}>{heading}</StyledHeading>
+          <StyledParagraph>{paragraph}</StyledParagraph>
+        </StyledContent>
+      )}
+      <StyledHero isPost={isPost} fluid={fluid} alt={alt} title={title} />
       {!isPost && <ScrollBtn />}
     </StyledWrapper>
   );

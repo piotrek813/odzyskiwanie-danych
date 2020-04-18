@@ -21,6 +21,14 @@ const StyledWrapper = styled.div`
   `}
 `;
 
+const StyledHeading = styled.h1`
+  font-size: ${({ theme }) => theme.font.size.heading.post};
+
+  ${media.small`
+      font-size: ${({ theme }) => theme.font.size.heading.normal};
+  `}
+`;
+
 const StyledMain = styled.main`
   font-size: ${({ theme }) => theme.font.size.content.normal};
   text-align: justify;
@@ -53,21 +61,26 @@ const PostTemplate = ({ data: { datoCmsPost } }) => {
     >
       <HelmetDatoCms seo={datoCmsPost.seoMetaTags} />
       <StyledWrapper>
-        <StyledMain>
-          {datoCmsPost.content.map((item) => (
-            <React.Fragment key={item.id}>
-              {item.model.apiKey === 'text' && (
-                <div
-                  // eslint-disable-next-line react/no-danger
-                  dangerouslySetInnerHTML={{
-                    __html: item.textNode.childMarkdownRemark.html,
-                  }}
-                />
-              )}
-              {item.model.apiKey === 'img' && <Img {...item.img} />}
-            </React.Fragment>
-          ))}
-        </StyledMain>
+        <div>
+          <header>
+            <StyledHeading>{datoCmsPost.heading}</StyledHeading>
+          </header>
+          <StyledMain>
+            {datoCmsPost.content.map((item) => (
+              <React.Fragment key={item.id}>
+                {item.model.apiKey === 'text' && (
+                  <div
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                      __html: item.textNode.childMarkdownRemark.html,
+                    }}
+                  />
+                )}
+                {item.model.apiKey === 'img' && <Img {...item.img} />}
+              </React.Fragment>
+            ))}
+          </StyledMain>
+        </div>
         <SideBarPost />
       </StyledWrapper>
     </Template>
