@@ -49,12 +49,8 @@ const StyledButton = styled(Button)`
 `;
 
 const StyledLink = styled(Link)`
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1;
+  text-decoration: none;
+  color: inherit;
 `;
 
 const PostReference = ({
@@ -67,10 +63,14 @@ const PostReference = ({
   isSmall,
 }) => (
   <StyledWrapper isBig={isBig}>
-    <StyledImg fluid={img.fluid} alt={heading} />
+    <Link to={`/blog/${slug}`}>
+      <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
+    </Link>
     <StyledContent>
       <StyledDate>{date}</StyledDate>
-      <StyledHeading>{heading}</StyledHeading>
+      <StyledLink to={`/blog/${slug}`}>
+        <StyledHeading>{heading}</StyledHeading>
+      </StyledLink>
       {!isSmall && (
         <>
           <StyledParagraph>{paragraph.substr(0, 300)}</StyledParagraph>
@@ -79,14 +79,15 @@ const PostReference = ({
           </StyledButton>
         </>
       )}
-      {isSmall && <StyledLink to={`/blog/${slug}`} />}
     </StyledContent>
   </StyledWrapper>
 );
 
 PostReference.propTypes = {
   slug: PropTypes.string.isRequired,
-  img: PropTypes.objectOf(PropTypes.object).isRequired,
+  img: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  ).isRequired,
   heading: PropTypes.string.isRequired,
   paragraph: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,

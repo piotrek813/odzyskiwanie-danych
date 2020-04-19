@@ -1,16 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { graphql } from 'gatsby';
+import Img from 'gatsby-image';
 import { HelmetDatoCms } from 'gatsby-source-datocms';
 import styled from 'styled-components';
 import media from 'utils/media';
 import Template from 'templates/Template';
-import PostReference from 'components/PostReference';
+import SideBarPost from 'components/SideBarPost';
+import Logo from 'assets/images/icon.png';
 
 const StyledWrapper = styled.div`
   width: 90%;
   margin: 39px auto 0 auto;
   display: grid;
+  margin-bottom: 50px;
 
   ${media.big`
     grid-template-columns: 1fr 300px;
@@ -19,14 +22,18 @@ const StyledWrapper = styled.div`
   `}
 `;
 
-const StyledAside = styled.aside`
-  width: 90%;
-  margin: 0 auto;
+const StyledHeading = styled.h1`
+  font-size: ${({ theme }) => theme.font.size.heading.post};
+
+  ${media.small`
+      font-size: ${({ theme }) => theme.font.size.heading.normal};
+  `}
 `;
 
 const StyledMain = styled.main`
   font-size: ${({ theme }) => theme.font.size.content.normal};
   text-align: justify;
+  margin-bottom: 50px;
 
   & img {
     display: flex;
@@ -38,49 +45,78 @@ const StyledMain = styled.main`
         width: 60%;
     `}
   }
+
+  ${media.big`
+      margin-bottom: 0;
+  `}
 `;
 
-const PostTemplate = ({ data: { datoCmsPost, allDatoCmsPost } }) => (
-  <Template
-    hero={{
-      ...datoCmsPost.hero,
-      heading: datoCmsPost.heading,
-      isPost: true,
-    }}
-  >
-    <HelmetDatoCms seo={datoCmsPost.seoMetaTags} />
-    <StyledWrapper>
-      <StyledMain
-        dangerouslySetInnerHTML={{
-          __html: datoCmsPost.contentNode.childMarkdownRemark.html,
-        }}
-      />
-      <StyledAside>
-        {allDatoCmsPost.edges.map(
-          ({
-            node: {
-              slug,
-              heading,
-              hero,
-              meta: { firstPublishedAt },
-              content,
-            },
-          }) => (
-            <PostReference
-              isSmall
-              key={slug}
-              slug={slug}
-              img={hero}
-              date={firstPublishedAt}
-              heading={heading}
-              paragraph={content}
-            />
-          )
-        )}
-      </StyledAside>
-    </StyledWrapper>
-  </Template>
-);
+const PostTemplate = ({ data: { datoCmsPost } }) => {
+  return (
+    <Template
+      hero={{
+        ...datoCmsPost.hero,
+        heading: datoCmsPost.heading,
+        isPost: true,
+      }}
+    >
+      <HelmetDatoCms seo={datoCmsPost.seoMetaTags}>
+        <script type="application/ld+json">{`
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://odzyskiawniedanych.warszawa.pl/"
+          },
+          "headline": "${datoCmsPost.heading}",
+          "description": "${datoCmsPost.seoMetaTags.tags[3].attributes.content}",
+          "image": "${datoCmsPost.hero.fluid.src}",
+          "author": {
+            "@type": "Organization",
+            "name": "All Data Recovery"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "All Data Recovery",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "${Logo}",
+              "width": 232,
+              "height": 110
+            }
+          },
+          "datePublished": "${datoCmsPost.meta.publishedAt},",
+          "dateModified": "${datoCmsPost.meta.updatedAt}"
+        }
+    `}</script>
+      </HelmetDatoCms>
+      <StyledWrapper>
+        <div>
+          <header>
+            <StyledHeading>{datoCmsPost.heading}</StyledHeading>
+          </header>
+          <StyledMain>
+            {datoCmsPost.content.map((item) => (
+              <React.Fragment key={item.id}>
+                {item.model.apiKey === 'text' && (
+                  <div
+                    // eslint-disable-next-line react/no-danger
+                    dangerouslySetInnerHTML={{
+                      __html: item.textNode.childMarkdownRemark.html,
+                    }}
+                  />
+                )}
+                {item.model.apiKey === 'img' && <Img {...item.img} />}
+              </React.Fragment>
+            ))}
+          </StyledMain>
+        </div>
+        <SideBarPost />
+      </StyledWrapper>
+    </Template>
+  );
+};
 
 PostTemplate.propTypes = {
   data: PropTypes.objectOf(PropTypes.object).isRequired,
@@ -92,37 +128,43 @@ export const query = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      meta {
+        updatedAt(formatString: "YYYY-MM-DD")
+        publishedAt(formatString: "YYYY-MM-DD")
+      }
       heading
-      contentNode {
-        childMarkdownRemark {
-          html
-          timeToRead
+      content {
+        ... on DatoCmsText {
+          id
+          model {
+            apiKey
+          }
+          textNode {
+            childMarkdownRemark {
+              html
+            }
+          }
+        }
+        ... on DatoCmsImg {
+          id
+          model {
+            apiKey
+          }
+          img {
+            fluid(maxWidth: 400) {
+              ...GatsbyDatoCmsFluid_noBase64
+            }
+            alt
+            title
+          }
         }
       }
       hero {
         fluid(maxWidth: 1600, imgixParams: { fm: "jpg", auto: "compress" }) {
           ...GatsbyDatoCmsFluid_noBase64
         }
-      }
-    }
-    allDatoCmsPost(
-      sort: { fields: [meta___firstPublishedAt], order: DESC }
-      limit: 3
-    ) {
-      edges {
-        node {
-          meta {
-            firstPublishedAt(formatString: "YYYY-MM-DD")
-          }
-          slug
-          hero {
-            fluid(maxWidth: 400, imgixParams: { fm: "jpg", auto: "compress" }) {
-              ...GatsbyDatoCmsFluid_noBase64
-            }
-          }
-          heading
-          content
-        }
+        alt
+        title
       }
     }
   }

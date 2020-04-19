@@ -16,15 +16,11 @@ const StyledWrapper = styled.section`
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40vh 60vh;
+  grid-template-rows: repeat(2, 1fr);
 
-  ${media.small`
-      grid-template-columns: 1fr 45%;
+  ${media.medium`
+      grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
-  `}
-
-  ${media.big`
-      grid-template-columns: 1fr 35%;
   `}
 `;
 
@@ -37,6 +33,12 @@ const StyledContactWrapper = styled.div`
 const StyledIframe = styled.iframe`
   border: 0;
   width: 100%;
+  height: 100%;
+  grid-row: 2;
+
+  ${media.medium`
+      grid-row: 1;
+  `}
 `;
 
 const ContactPage = ({ data: { datoCmsContact } }) => (
@@ -49,8 +51,8 @@ const ContactPage = ({ data: { datoCmsContact } }) => (
     <HelmetDatoCms seo={datoCmsContact.seoMetaTags} />
     <StyledWrapper>
       <StyledIframe
-        title="map"
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2444.772123085558!2d20.959745116148493!3d52.211188479756935!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x471ecca85746ce63%3A0xf826ff243b5fc8c2!2sOpaczewska%2043%2C%2002-201%20Warszawa%2C%20Polska!5e0!3m2!1spl!2sus!4v1586353080640!5m2!1spl!2sus"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBf_iOF4deZEAmUBiRmCn2eEVg1xm_BUtg&q=Zygmunta+Modzalewskiego+63,Warszawa+Polska&center=52.189796,21.015067"
+        allowfullscreen
       />
       <StyledContactWrapper>
         <ContactItem

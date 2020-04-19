@@ -24,6 +24,17 @@ const Template = ({ children, hero }) => {
     <ThemeProvider theme={theme}>
       <>
         <HelmetDatoCms seo={data.datoCmsHome.seoMetaTags}>
+          <script type="application/ld+json">{`
+            {
+              "@context": "https://schema.org",
+              "@type": "Organization",
+              "name": "All Data Recovery - Odzyskiwanie danych",
+              "url": "https://www.alldatarecovery.pl",
+              "sameAs": [
+                "https://www.facebook.com/All-Data-Recovery-Odzyskiwanie-danych-Warszawa-244519619653566"
+              ]
+            }
+          `}</script>
           <link
             href="https://fonts.googleapis.com/css?family=Montserrat:400,500,700&display=swap&subset=latin-ext"
             rel="stylesheet"
@@ -32,7 +43,6 @@ const Template = ({ children, hero }) => {
         <GlobalStyle />
         <Navbar isPost={hero.isPost} />
         <HeroTemplate {...hero} />
-        <div id="start" />
         {children}
         <Footer />
       </>

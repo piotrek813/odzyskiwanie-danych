@@ -18,7 +18,8 @@ const MenuWrapper = posed.div({
 });
 
 const StyledWrapper = styled.nav`
-  position: ${({ isPost }) => (!isPost ? 'absolute' : 'static')};
+  position: ${({ isPost }) => (!isPost ? 'absolute' : 'fixed')};
+  z-index: 9998;
   top: 0;
   left: 0;
   width: 100%;
@@ -28,14 +29,20 @@ const StyledWrapper = styled.nav`
   padding: ${({ isPost }) => (!isPost ? '13px' : '13px 39px')};
   color: ${({ theme, isPost }) => (!isPost ? theme.white : theme.black)};
 
+  ${({ theme, isPost }) =>
+    isPost &&
+    `
+      background: ${theme.gray};
+      box-shadow: 0px 4px 40px ${theme.primary};
+  `};
+
   ${media.small`
-    padding: 34px 50px;
+    padding: ${({ isPost }) => (!isPost ? '34px 50px' : '20px 50px')};
   `}
 
   ${media.big`
-      position: absolute;
       width: ${({ isPost }) => (!isPost ? '65%' : '100%')};
-      color: ${({ theme, isPost }) => (!isPost ? theme.black : theme.white)};
+      color: ${({ theme }) => theme.black};
   `}
 `;
 
@@ -67,7 +74,7 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   z-index: 9998;
 
   ${media.small`
-    color: ${({ theme, isPost }) => (!isPost ? theme.white : theme.black)};
+    color: inherit;
     position: static;
     background: none;
     width: auto;
@@ -75,7 +82,7 @@ const StyledMenuWrapper = styled(MenuWrapper)`
   `}
 
   ${media.big`
-      color: ${({ theme, isPost }) => (!isPost ? theme.black : theme.white)};
+      color: inherit;
   `}
 `;
 
@@ -157,11 +164,7 @@ class Navbar extends Component {
     return (
       <StyledWrapper isPost={isPost}>
         <StyledLogo>
-          <StyledLink to="/">
-            All Data
-            <br />
-            Recovery
-          </StyledLink>
+          <StyledLink to="/">Home</StyledLink>
         </StyledLogo>
         <StyledHamburger
           isPost={isPost}

@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import media from 'utils/media';
 import Img from 'gatsby-image';
+import { Link } from 'gatsby';
 import Button from 'components/Button';
 
 const StyledWrapper = styled.section`
@@ -11,29 +12,30 @@ const StyledWrapper = styled.section`
   `}
 
   ${media.big`
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: ${({ isMirror }) => (!isMirror ? 'row' : 'row-reverse')};
+      display: grid;
+      grid-template-columns: 1fr 1fr;
       padding: 0;
+      align-items: center;
   `}
 `;
 
 const StyledImg = styled(Img)`
   width: 100%;
-
-  ${media.big`
-      width: 50%;
-  `}
 `;
 
 const StyledContent = styled.div`
   padding: 35px;
 
   ${media.big`
+      grid-column: ${({ isMirror }) => (!isMirror ? 'auto' : '1')};
+      grid-row: ${({ isMirror }) => (!isMirror ? 'auto' : '1')};
       padding: 50px;
-      width: 50%;
   `}
+`;
+
+const StyledLink = styled(Link)`
+  text-decoration: none;
+  color: inherit;
 `;
 
 const StyledHeading = styled.h2`
@@ -49,10 +51,14 @@ const StyledParagraph = styled.p`
 
 const ServiceSectionTemplate = ({ img, heading, excerpt, slug, isMirror }) => {
   return (
-    <StyledWrapper isMirror={isMirror}>
-      <StyledImg fluid={img.fluid} alt={heading} />
-      <StyledContent>
-        <StyledHeading>{heading}</StyledHeading>
+    <StyledWrapper>
+      <Link to={`/${slug}`}>
+        <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
+      </Link>
+      <StyledContent isMirror={isMirror}>
+        <StyledLink to={`/${slug}`}>
+          <StyledHeading>{heading}</StyledHeading>
+        </StyledLink>
         <StyledParagraph>{excerpt}</StyledParagraph>
         <Button to={`/${slug}`}>Czytaj więcej</Button>
       </StyledContent>
@@ -61,7 +67,9 @@ const ServiceSectionTemplate = ({ img, heading, excerpt, slug, isMirror }) => {
 };
 
 ServiceSectionTemplate.propTypes = {
-  img: PropTypes.objectOf(PropTypes.object).isRequired,
+  img: PropTypes.objectOf(
+    PropTypes.oneOfType([PropTypes.object, PropTypes.string])
+  ).isRequired,
   heading: PropTypes.string.isRequired,
   excerpt: PropTypes.string.isRequired,
   slug: PropTypes.string.isRequired,

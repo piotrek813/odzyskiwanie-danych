@@ -48,13 +48,13 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `Odzyskiwanie danych Warszawa Mokotów`,
+        short_name: `Odzyskiwanie Danych`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
+        background_color: `#222831`,
+        theme_color: `#222831`,
         display: `minimal-ui`,
-        icon: `src/assets/images/logo_all_data_recovery.png`,
+        icon: `src/assets/images/icon.png`,
       },
     },
     `gatsby-transformer-remark`,
@@ -62,6 +62,12 @@ module.exports = {
       resolve: `gatsby-source-datocms`,
       options: {
         apiToken: process.env.DATO_API_TOKEN,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-163990111-1',
       },
     },
   ],
