@@ -128,6 +128,10 @@ export const query = graphql`
       seoMetaTags {
         ...GatsbyDatoCmsSeoMetaTags
       }
+      meta {
+        updatedAt(formatString: "YYYY-MM-DD")
+        publishedAt(formatString: "YYYY-MM-DD")
+      }
       heading
       content {
         ... on DatoCmsText {
