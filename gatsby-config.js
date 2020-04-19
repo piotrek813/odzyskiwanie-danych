@@ -54,7 +54,7 @@ module.exports = {
         background_color: `#222831`,
         theme_color: `#222831`,
         display: `minimal-ui`,
-        icon: `src/assets/images/logo_all_data_recovery.png`,
+        icon: `src/assets/images/icon.png`,
       },
     },
     `gatsby-transformer-remark`,
