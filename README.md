@@ -5,3 +5,7 @@ https://odzyskiwaniedanych.warszawa.pl/
 * <a href="buddy.works/">Buddy</a>
 * <a href="datocms.com/">DatoCms</a>
 * <a href="https://styled-components.com/">Styled Components</a>
+
+**How to run**
+* `yarn`
+* `gatsby develop`
