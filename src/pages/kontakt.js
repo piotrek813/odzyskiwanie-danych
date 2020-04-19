@@ -52,7 +52,7 @@ const ContactPage = ({ data: { datoCmsContact } }) => (
     <StyledWrapper>
       <StyledIframe
         src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBf_iOF4deZEAmUBiRmCn2eEVg1xm_BUtg
-          &q=Zygmunta+Modzalewskiego+63,Warszawa+Polska"
+          &q=Zygmunta+Modzalewskiego+63,Warszawa+Polska&center=21.014655,52.189821"
         allowfullscreen
       />
       <StyledContactWrapper>
