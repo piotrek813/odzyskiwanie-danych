@@ -64,9 +64,13 @@ const PostTemplate = ({ data: { datoCmsService } }) => (
         {
           "@context": "https://schema.org",
           "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://odzyskiawniedanych.warszawa.pl/"
+          },
           "headline": "${datoCmsService.heading}",
           "description": "${datoCmsService.seoMetaTags.tags[3].attributes.content}",
-          "image": "${datoCmsService.hero}",
+          "image": "${datoCmsService.hero.fluid.src}",
           "author": {
             "@type": "Organization",
             "name": "All Data Recovery"
@@ -78,11 +82,11 @@ const PostTemplate = ({ data: { datoCmsService } }) => (
               "@type": "ImageObject",
               "url": "${Logo}",
               "width": 232,
-              "height": 110,
+              "height": 110
             }
           },
-          "datePublished": ${datoCmsService.meta.publishedAt},
-          "dateModified": ${datoCmsService.meta.updatedAt}
+          "datePublished": "${datoCmsService.meta.publishedAt},",
+          "dateModified": "${datoCmsService.meta.updatedAt}"
         }
     `}</script>
     </HelmetDatoCms>

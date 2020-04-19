@@ -64,5 +64,11 @@ module.exports = {
         apiToken: process.env.DATO_API_TOKEN,
       },
     },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-163990111-1',
+      },
+    },
   ],
 };
