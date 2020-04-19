@@ -1,8 +1,8 @@
 export default {
   white: '#ffffff',
   black: '#000',
-  primary: '#5c6672',
-  lightenPrimary: '#9aa6b5',
+  primary: '#222831',
+  lightenPrimary: '#393e46',
   gray: '#f7f6f6',
   font: {
     size: {

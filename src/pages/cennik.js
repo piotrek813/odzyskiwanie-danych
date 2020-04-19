@@ -16,6 +16,15 @@ const StyledTable = styled.table`
 const StyledThead = styled.thead`
   background: ${({ theme }) => theme.primary};
   color: ${({ theme }) => theme.white};
+  font-size: ${({ theme }) => theme.font.size.content.medium};
+`;
+
+const StyledTh = styled.th`
+  padding: 5px;
+
+  &:last-of-type {
+    padding: 5px 15px;
+  }
 `;
 
 const StyledTr = styled.tr`
@@ -57,9 +66,9 @@ const PricingPage = ({ data: { datoCmsPricing } }) => (
     <StyledTable>
       <StyledThead>
         <StyledTr>
-          <th>Opis</th>
-          <th>Cena</th>
-          <th>Dodatkowy opis</th>
+          <StyledTh>Opis</StyledTh>
+          <StyledTh>Cena</StyledTh>
+          <StyledTh>Dodatkowy opis</StyledTh>
         </StyledTr>
       </StyledThead>
       <tbody>

@@ -2,7 +2,6 @@ import React from 'react';
 import { graphql } from 'gatsby';
 import { HelmetDatoCms } from 'gatsby-source-datocms';
 import styled from 'styled-components';
-import Img from 'gatsby-image';
 import PropTypes from 'prop-types';
 import media from 'utils/media';
 import MainTemplate from 'templates/MainTemplate';
@@ -17,15 +16,11 @@ const StyledWrapper = styled.section`
   height: 100vh;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 40vh 60vh;
+  grid-template-rows: repeat(2, 1fr);
 
-  ${media.small`
-      grid-template-columns: 1fr 45%;
+  ${media.medium`
+      grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
-  `}
-
-  ${media.big`
-      grid-template-columns: 1fr 35%;
   `}
 `;
 
@@ -35,9 +30,16 @@ const StyledContactWrapper = styled.div`
   justify-content: center;
 `;
 
-// const StyledImg = styled(Img)`
+const StyledIframe = styled.iframe`
+  border: 0;
+  width: 100%;
+  height: 100%;
+  grid-row: 2;
 
-// `;
+  ${media.medium`
+      grid-row: 1;
+  `}
+`;
 
 const ContactPage = ({ data: { datoCmsContact } }) => (
   <MainTemplate
@@ -48,7 +50,11 @@ const ContactPage = ({ data: { datoCmsContact } }) => (
   >
     <HelmetDatoCms seo={datoCmsContact.seoMetaTags} />
     <StyledWrapper>
-      <Img {...datoCmsContact.mapImg} />
+      <StyledIframe
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBf_iOF4deZEAmUBiRmCn2eEVg1xm_BUtg
+          &q=Zygmunta+Modzalewskiego+63,Warszawa+Polska"
+        allowfullscreen
+      />
       <StyledContactWrapper>
         <ContactItem
           icon={faMapMarkerAlt}
@@ -80,13 +86,6 @@ export const query = graphql`
       }
       heading
       paragraph
-      mapImg {
-        fluid {
-          ...GatsbyDatoCmsFluid_noBase64
-        }
-        alt
-        title
-      }
       adressHeading
       adressContentNode {
         childMarkdownRemark {
