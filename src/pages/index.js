@@ -5,7 +5,7 @@ import { HelmetDatoCms } from 'gatsby-source-datocms';
 import MainTemplate from 'templates/MainTemplate';
 import ServiceSectionTemplate from 'templates/ServiceSectionTemplate';
 import BlogReferenceTemplate from 'templates/BlogReferenceTemplate';
-import Logo from 'assets/images/logo_all_data_recovery.png';
+import Logo from 'assets/images/icon.png';
 
 const IndexPage = ({ data }) => (
   <MainTemplate hero={data.datoCmsHome}>

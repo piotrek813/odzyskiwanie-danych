@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import media from 'utils/media';
 import Template from 'templates/Template';
 import SideBarPost from 'components/SideBarPost';
+import Logo from 'assets/images/icon.png';
 
 const StyledWrapper = styled.div`
   width: 90%;
@@ -59,7 +60,37 @@ const PostTemplate = ({ data: { datoCmsPost } }) => {
         isPost: true,
       }}
     >
-      <HelmetDatoCms seo={datoCmsPost.seoMetaTags} />
+      <HelmetDatoCms seo={datoCmsPost.seoMetaTags}>
+        <script type="application/ld+json">{`
+        {
+          "@context": "https://schema.org",
+          "@type": "Article",
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://odzyskiawniedanych.warszawa.pl/"
+          },
+          "headline": "${datoCmsPost.heading}",
+          "description": "${datoCmsPost.seoMetaTags.tags[3].attributes.content}",
+          "image": "${datoCmsPost.hero.fluid.src}",
+          "author": {
+            "@type": "Organization",
+            "name": "All Data Recovery"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "All Data Recovery",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "${Logo}",
+              "width": 232,
+              "height": 110
+            }
+          },
+          "datePublished": "${datoCmsPost.meta.publishedAt},",
+          "dateModified": "${datoCmsPost.meta.updatedAt}"
+        }
+    `}</script>
+      </HelmetDatoCms>
       <StyledWrapper>
         <div>
           <header>

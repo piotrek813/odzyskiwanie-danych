@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import media from 'utils/media';
 import Template from 'templates/Template';
 import SideBarPost from 'components/SideBarPost';
-import Logo from 'assets/images/logo_all_data_recovery.png';
+import Logo from 'assets/images/icon.png';
 
 const StyledWrapper = styled.div`
   width: 90%;
