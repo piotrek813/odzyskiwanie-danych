@@ -20,8 +20,10 @@ const MainTemplate = ({ children, hero }) => {
 
   return (
     <Template hero={{ ...data.datoCmsHome.hero, ...hero }}>
-      <div id="start" />
-      {children}
+      <main>
+        <div id="start" />
+        {children}
+      </main>
     </Template>
   );
 };

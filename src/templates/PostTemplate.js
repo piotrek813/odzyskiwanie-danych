@@ -35,6 +35,16 @@ const StyledMain = styled.main`
   text-align: justify;
   margin-bottom: 50px;
 
+  & a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.lightenPrimary};
+    font-weight: ${({ theme }) => theme.font.weight.medium};
+
+    &:hover {
+      color: ${({ theme }) => theme.primary};
+    }
+  }
+
   & img {
     display: flex;
     margin: 0 auto;
