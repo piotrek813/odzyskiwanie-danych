@@ -33,7 +33,7 @@ const StyledWrapper = styled.nav`
     isPost &&
     `
       background: ${theme.gray};
-      box-shadow: 0px 4px 40px ${theme.primary};
+      box-shadow: 0px 2px 20px ${theme.primary}b3;
   `};
 
   ${media.small`
