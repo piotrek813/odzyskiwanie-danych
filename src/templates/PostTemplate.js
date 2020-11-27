@@ -50,6 +50,7 @@ const StyledMain = styled.main`
     margin: 0 auto;
     padding: 30px 0;
     width: 100%;
+    /* object-fit: contain !important; */
 
     ${media.small`
         width: 60%;

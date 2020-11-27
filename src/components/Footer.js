@@ -13,18 +13,38 @@ const StyledFooter = styled.footer`
   ${media.small`
       font-size: ${({ theme }) => theme.font.size.content.medium};
   `}
+
+  & a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.link};
+    font-weight: ${({ theme }) => theme.font.weight.medium};
+
+    &:hover {
+      color: ${({ theme }) => theme.white};
+    }
+  }
 `;
 
 const Footer = () => {
-  const data = useStaticQuery(graphql`
+  const { datoCmsFooter } = useStaticQuery(graphql`
     query footerQuery {
       datoCmsFooter {
-        content
+        contentNode {
+          childMarkdownRemark {
+            html
+          }
+        }
       }
     }
   `);
 
-  return <StyledFooter>{data.datoCmsFooter.content}</StyledFooter>;
+  return (
+    <StyledFooter
+      dangerouslySetInnerHTML={{
+        __html: datoCmsFooter.contentNode.childMarkdownRemark.html,
+      }}
+    />
+  );
 };
 
 export default Footer;

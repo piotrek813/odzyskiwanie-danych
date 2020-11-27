@@ -4,6 +4,7 @@ export default {
   primary: '#222831',
   lightenPrimary: '#393e46',
   gray: '#f7f6f6',
+  link: '#adb5c1',
   font: {
     size: {
       heading: {
