@@ -9,6 +9,8 @@
     "@fortawesome/free-solid-svg-icons": "^5.13.0",
     "@fortawesome/react-fontawesome": "^0.1.9",
     "babel-plugin-styled-components": "^1.10.7",
+    "basic-ftp": "^4.6.3",
+    "dotenv": "^8.2.0",
     "gatsby": "^2.19.45",
     "gatsby-image": "^2.2.44",
     "gatsby-plugin-google-analytics": "^2.2.4",
@@ -57,7 +59,8 @@
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1",
+    "deploy-ftp": "node deploy-ftp.js"
   },
   "repository": {
     "type": "git",
