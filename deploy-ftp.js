@@ -12,7 +12,9 @@ async function example() {
       secure: true,
       secureOptions: { rejectUnauthorized: false },
     });
-    await client.ensureDir('/domains/webarts.pl/public_html');
+    await client.ensureDir(
+      '/domains/odzyskiwaniedanych.warszawa.pl/public_html'
+    );
     await client.clearWorkingDir();
     await client.uploadFromDir(`${__dirname}/public`);
   } catch (err) {
