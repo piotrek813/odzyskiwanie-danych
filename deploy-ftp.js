@@ -16,6 +16,7 @@ async function example() {
     await client.clearWorkingDir();
     await client.uploadFromDir(`${__dirname}/public`);
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.log(err);
   }
   client.close();
