@@ -51,7 +51,7 @@ const ContactPage = ({ data: { datoCmsContact } }) => (
     <HelmetDatoCms seo={datoCmsContact.seoMetaTags} />
     <StyledWrapper>
       <StyledIframe
-        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBf_iOF4deZEAmUBiRmCn2eEVg1xm_BUtg&q=Zygmunta+Modzelewskiego+63%2Fu5,Warszawa+Polska&center=52.189796,21.015067"
+        src="https://www.google.com/maps/embed/v1/place?key=AIzaSyBf_iOF4deZEAmUBiRmCn2eEVg1xm_BUtg&q=All+data+recovery+Zygmunta+Modzelewskiego+63+lokal+u5,Warszawa+Polska&center=52.189796,21.015067"
         allowfullscreen
       />
       <StyledContactWrapper>

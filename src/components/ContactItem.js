@@ -15,7 +15,7 @@ const StyledHeading = styled.h3`
   font-size: ${({ theme }) => theme.font.size.content.medium};
 `;
 
-const StyledParagraph = styled.p`
+const StyledParagraph = styled.div`
   font-size: ${({ theme }) => theme.font.size.content.medium};
 `;
 
