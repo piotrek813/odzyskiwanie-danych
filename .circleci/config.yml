@@ -15,3 +15,11 @@ jobs:
       - run:
           name: deploy
           command: yarn deploy-ftp
+      - run:
+          name: Notify DatoCMS about the status of the job
+          command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"failed\" } }" https://webhooks.datocms.com/0f7d92a212e78d3f4451/deploy-results'
+          when: on_fail
+      - run:
+          name: Notify DatoCMS about the status of the job
+          command: 'curl -X POST --data-binary "{\"payload\": { \"branch\": \"$CIRCLE_BRANCH\", \"status\": \"success\" } }" https://webhooks.datocms.com/0f7d92a212e78d3f4451/deploy-results'
+          when: on_success
