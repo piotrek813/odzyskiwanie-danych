@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import PropTypes from 'prop-types';
 import Img from 'gatsby-image';
 import { Link } from 'gatsby';
@@ -21,6 +21,23 @@ const StyledWrapper = styled.section`
 
 const StyledImg = styled(Img)`
   width: 100%;
+
+  ${({ isBig }) =>
+    isBig
+      ? css`
+          height: 100%;
+          ${media.small`
+      height: 400px;
+    `}
+        `
+      : css`
+          ${media.u632`
+      height: 250px;
+    `}
+          ${media.medium`
+      height: 300px;
+    `}
+        `}
 `;
 
 const StyledContent = styled.div`
@@ -64,7 +81,12 @@ const PostReference = ({
 }) => (
   <StyledWrapper isBig={isBig}>
     <Link to={`/blog/${slug}`}>
-      <StyledImg fluid={img.fluid} alt={img.alt} title={img.title} />
+      <StyledImg
+        fluid={img.fluid}
+        alt={img.alt}
+        title={img.title}
+        isBig={isBig}
+      />
     </Link>
     <StyledContent>
       <StyledDate>{date}</StyledDate>
